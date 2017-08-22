@@ -10,11 +10,11 @@ wget --no-check-certificate -t 10 -T 30 http://c.nnjsx.cn/GL/dnsmasq/update/adbl
 echo
 echo -e "\033[41;37m 组合下载时间较长.请耐心等待……\033[0m"
 echo
-wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsad -qO \
+wget --no-check-certificate -t 30 -T 80 https://raw.githubusercontent.com/896660689/Hsfq/master/hsad -qO \
 /tmp/ad.conf && sleep 2 && chmod +x /tmp/ad.conf && . /tmp/ad.conf
 echo
 # 下载 '网络收集' HOSTS 规则
-wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsabd -qO \
+wget --no-check-certificate -t 30 -T 80 https://raw.githubusercontent.com/896660689/Hsfq/master/hsabd -qO \
 /tmp/abd.conf && sleep 2 && chmod +x /tmp/abd.conf && . /tmp/abd.conf
 sleep 2
 echo -e " 导入自定义广告黑名单缓存规则 "
@@ -83,10 +83,10 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			echo
 			echo -e "\033[41;37m Hosts 更新失败，重新启动更新任务\033[0m"
 			sh /tmp/tmp_hs_up
-			echo
 		fi
-	fi	
+	fi
 fi
 
 # 删除临时文件
 rm -f /tmp/hosts_ad.txt
+exit 0
