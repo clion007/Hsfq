@@ -90,6 +90,5 @@ fi
 
 # 删除临时文件
 rm -f /tmp/hosts_ad.txt
-rm -rf /tmp/tmp_hs_up
 sleep 3
 exit 0
