@@ -69,4 +69,4 @@ fi
 # 删除临时合并缓存
 rm -f /tmp/hosts_fq.txt
 rm -rf /tmp/hosts_fq
-exit
+echo
