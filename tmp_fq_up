@@ -63,8 +63,8 @@ if [ -f /tmp/hosts_fq.conf ]; then
 			sh /tmp/tmp_fq_up
 			echo -e "\033[41;37m FQ 更新失败，重新启动更新任务\033[0m"
 			echo
-		fi	
-	fi	
+		fi
+	fi
 fi
 echo
 # 删除临时合并缓存
