@@ -1,0 +1,6 @@
+# 请在下面添加广告黑名单
+# 每行输入要屏蔽广告网址不含http://符号
+active.admore.com.cn
+mtty-cdn.mtty.com
+static-alias-1.360buyimg.com
+image.yzmg.com
