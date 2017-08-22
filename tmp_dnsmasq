@@ -15,7 +15,9 @@ else
 	echo "开始写入启动代码"
 fi
 echo
-echo "# 开启日志选项
+echo "listen-address=${route_vlan},127.0.0.1
+ # 添加监听地址
+ # 开启日志选项
 log-queries
 log-facility=/tmp/dnsmasq.log
 # 异步log,缓解阻塞，提高性能。默认为5，最大为100
@@ -27,9 +29,10 @@ strict-order
 # 缓存最长时间
 min-cache-ttl=1800
 # 指定服务器'域名''地址'文件夹
-conf-dir=/etc/storage/dnsmasq.d/conf
+#conf-dir=/etc/storage/dnsmasq.d/conf/
+conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
-addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /etc/storage/dnsmasq/dnsmasq.conf
+addn-hosts=/etc/storage/dnsmasq.d/hosts/hosts_ad.conf" >> /etc/storage/dnsmasq/dnsmasq.conf
 echo
 sed -i "/# /d" /etc/storage/dnsmasq/dnsmasq.conf
 sleep 2
