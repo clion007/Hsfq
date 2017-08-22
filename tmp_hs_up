@@ -76,11 +76,10 @@ if [ -f /tmp/hosts_ad.conf ]; then
 		logger -t "【$LOGTIME】" "Hosts 规则更新完成..."
 		echo
 		mv -f /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf && sleep 3
-		if [ $? -ne 0 ]; then
-			logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
-			sh /tmp/tmp_hs_up
-			echo
-			echo -e "\033[41;37m Hosts 更新失败，重新启动更新任务\033[0m"
+		if [ $? -ne 0 ]
+		then
+		echo " Hosts 更新失败，重新启动更新任务 " && sh /tmp/tmp_hs_up
+		logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 		fi
 	fi
 fi
