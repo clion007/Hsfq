@@ -59,9 +59,9 @@ if [ -f /tmp/hosts_fq.conf ]; then
 			echo -e "\e[1;33m FQ 规则更新完成.\e[0m"
 		else
 			logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
+			sh /tmp/tmp_fq_up
 			echo
 			echo -e "\033[41;37m FQ 更新失败，重新启动更新任务\033[0m"
-			sh /tmp/tmp_fq_up
 		fi
 	fi
 fi
