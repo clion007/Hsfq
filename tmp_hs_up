@@ -86,6 +86,6 @@ if [ -f /tmp/hosts_ad.conf ]; then
 		fi
 	fi
 fi
-
+sleep 2
 # 删除临时文件
 rm -f /tmp/hosts_ad.txt
