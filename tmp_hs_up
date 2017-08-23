@@ -60,12 +60,10 @@ sleep 2
 # 修饰结束
 sed -i '$a # 修饰 hosts 结束' /tmp/hosts_ad.conf
 
-# 删除 hosts 合并缓存
-rm -rf /tmp/hosts_ad
-
 echo " 更新 hosts_ad 规则."
+sleep 2
 if [ -f /tmp/hosts_ad.conf ]; then
-echo | awk '{print$0}' /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | sort | uniq -u > /tmp/hosts_ad.txt && sleep 2
+cat /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | awk '{print$0}' | sort | uniq > /tmp/hosts_ad.txt && sleep 2
 	if [ ! -s "/tmp/hosts_ad.txt" ]; then
 		logger -t "【$LOGTIME】" "Hosts 规则已为最新,无需更新..."
 		echo
@@ -82,4 +80,5 @@ else
 fi
 
 # 删除临时文件
+rm -rf /tmp/hosts_ad
 rm -f /tmp/hosts_ad.txt
