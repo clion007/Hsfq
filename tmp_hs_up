@@ -65,7 +65,7 @@ rm -rf /tmp/hosts_ad
 
 echo " 更新 hosts_ad 规则."
 echo
-if [ ! -f /tmp/hosts_ad.conf ]; then
+if [ -f /tmp/hosts_ad.conf ]; then
 	echo | awk '{print$0}' /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | sort | uniq -u > /tmp/hosts_ad.txt && sleep 2
 	if [ ! -s "/tmp/hosts_ad.txt" ]; then
 		logger -t "【$LOGTIME】" "Hosts 规则已为最新,无需更新..."
