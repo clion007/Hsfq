@@ -55,12 +55,10 @@ if [ -f /tmp/hosts_fq.conf ]; then
 		logger -t "【$LOGTIME】" "$LOGTIME FQ 规则更新完成..."
 		echo
 		mv -f /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf && sleep 3
-		if [ $? -ne 0 ]
-		then
-		echo " FQ 更新失败，重新启动更新任务 " && sh /tmp/tmp_fq_up
-		logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
-		fi
 	fi
+else
+	logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
+	echo -e "\033[41;37m FQ 更新失败，重新启动更新任务\033[0m" && sh /tmp/tmp_fq_up
 fi
 sleep 2
 # 删除临时合并缓存
