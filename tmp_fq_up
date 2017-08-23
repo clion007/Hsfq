@@ -45,7 +45,7 @@ sed -i '$a # Modified DNS end' /tmp/hosts_fq.conf
 
 echo " 更新 hosts_fq 规则."
 if [ -f /tmp/hosts_fq.conf ]; then
-	echo | awk '{print$0}' /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf | sort | uniq -u > /tmp/hosts_fq.txt && sleep 2
+echo | awk '{print$0}' /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf | sort | uniq -u > /tmp/hosts_fq.txt && sleep 2
 	if [ ! -s "/tmp/hosts_fq.txt" ]; then
 		logger -t "【$LOGTIME】" "FQ 规则已为最新,无需更新..."
 		echo
