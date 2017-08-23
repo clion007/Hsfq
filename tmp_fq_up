@@ -47,6 +47,9 @@ echo " 更新 hosts_fq 规则."
 echo
 if [ ! -f /tmp/hosts_fq.conf ]; then
 	echo | awk '{print$0}' /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf | sort | uniq -u > /tmp/hosts_fq.txt && sleep 2
+	logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
+	echo -e "\033[41;37m FQ 更新失败，重新启动更新任务\033[0m" && sh /tmp/tmp_fq_up
+else
 	if [ ! -s "/tmp/hosts_fq.txt" ]; then
 		logger -t "【$LOGTIME】" "FQ 规则已为最新,无需更新..."
 		echo
@@ -56,9 +59,6 @@ if [ ! -f /tmp/hosts_fq.conf ]; then
 		echo
 		mv -f /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf && sleep 3
 	fi
-else
-	logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
-	echo -e "\033[41;37m FQ 更新失败，重新启动更新任务\033[0m" && sh /tmp/tmp_fq_up
 fi
 sleep 2
 # 删除临时合并缓存
