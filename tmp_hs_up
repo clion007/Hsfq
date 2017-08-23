@@ -1,5 +1,5 @@
 #!/bin/sh
-# by lanse
+# Compile:by-lanse    2018-08-24
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 echo -e "\e[1;36m HOSTS 去广告规则开始下载... \e[0m"
@@ -64,9 +64,8 @@ sed -i '$a # 修饰 hosts 结束' /tmp/hosts_ad.conf
 rm -rf /tmp/hosts_ad
 
 echo " 更新 hosts_ad 规则."
-echo
 if [ -f /tmp/hosts_ad.conf ]; then
-	echo | awk '{print$0}' /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | sort | uniq -u > /tmp/hosts_ad.txt && sleep 2
+echo | awk '{print$0}' /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | sort | uniq -u > /tmp/hosts_ad.txt && sleep 2
 	if [ ! -s "/tmp/hosts_ad.txt" ]; then
 		logger -t "【$LOGTIME】" "Hosts 规则已为最新,无需更新..."
 		echo
@@ -81,6 +80,6 @@ else
 	logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 	echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m" && sh /tmp/tmp_hs_up
 fi
-sleep 2
+
 # 删除临时文件
 rm -f /tmp/hosts_ad.txt
