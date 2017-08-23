@@ -1,8 +1,9 @@
 #!/bin/sh
-# by lanse
+# Compile:by-lanse    2018-08-24
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
+
 echo -e "\e[1;36m FQ 翻墙规则开始下载... \e[0m"
 
 # 下载 FQ 组合规则
@@ -15,7 +16,6 @@ cp /etc/storage/dnsmasq.d/userlist /tmp/userlist
 # 合并 dnsmasq 缓存
 cat /tmp/userlist /tmp/fq > /tmp/hosts_fq
 
-sleep 2
 # 删除 dnsmasq 缓存
 rm -rf /tmp/userlist
 rm -rf /tmp/fq
@@ -44,7 +44,6 @@ sleep 2
 sed -i '$a # Modified DNS end' /tmp/hosts_fq.conf
 
 echo " 更新 hosts_fq 规则."
-echo
 if [ -f /tmp/hosts_fq.conf ]; then
 	echo | awk '{print$0}' /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf | sort | uniq -u > /tmp/hosts_fq.txt && sleep 2
 	if [ ! -s "/tmp/hosts_fq.txt" ]; then
@@ -60,7 +59,7 @@ else
 	logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
 	echo -e "\e[1;37m FQ 更新失败，重新启动更新任务\e[0m" && sh /tmp/tmp_fq_up
 fi
-sleep 2
+
 # 删除临时合并缓存
 rm -f /tmp/hosts_fq.txt
 rm -rf /tmp/hosts_fq
