@@ -16,7 +16,7 @@ TMP_ABD4=/tmp/tmp_abd4
 #done
 echo
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/vokins/yhosts/master/dnsmasq/union.conf \
-| sed -E -e "s/#.*$//" -e "s/[[:space:]]*//g" -e "/#/d" -e "/^$/d" -e "s/0.0.0.0/127.0.0.1/" >> ${TMP_ABD3}
+| awk '{if($0!=line)print; line=$0}' | sed -E -e "s/address=\/./127.0.0.1\ /" -e "s/0.0.0.0$//" -e "/#/d" -e "s/.$//" >> ${TMP_ABD3}
 echo
 wget --no-check-certificate -t 20 -T 60 -O- https://easylist-downloads.adblockplus.org/easylistchina.txt \
 | grep ^\|\|[^\*]*\^$ | sed -e "s:||:127.0.0.1 :"  -e "s/.$//" >> ${TMP_ABD4}
