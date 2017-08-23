@@ -4,7 +4,7 @@ route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " 
 echo
 ## 配置dnsmasq.conf启动规则
 grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
-if [ $? -eq 0 ]; then
+if [ ! $? -eq 0 ]; then
 	sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 	sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
 	sed -i '/no-hosts/d' /etc/storage/dnsmasq/dnsmasq.conf
@@ -32,8 +32,4 @@ min-cache-ttl=1800
 conf-dir=/etc/storage/dnsmasq.d/conf/
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
-addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /etc/storage/dnsmasq/dnsmasq.conf
-echo
-sed -i "/# /d" /etc/storage/dnsmasq/dnsmasq.conf
-sleep 2
-rm /tmp/tmp_dnsmasq >/dev/null 2>&1
+addn-hosts=/etc/storage/dnsmasq.d/hosts" 
