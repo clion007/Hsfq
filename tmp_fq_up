@@ -1,62 +1,38 @@
 #!/bin/sh
-# Compile:by-lanse    2018-08-24
+# Compile:by-lanse  2017.08.24
 LOGTIME=$(date "+%m-%d %H:%M:%S")
-route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
-username=`nvram get http_username`
 
-echo -e "\e[1;36m FQ 翻墙规则开始下载... \e[0m"
-
-# 下载 FQ 组合规则
-wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq -qO \
-/tmp/fq.conf && sleep 2 && chmod +x /tmp/fq.conf && . /tmp/fq.conf
-echo
-# 添加用户自定规则缓存
-cp /etc/storage/dnsmasq.d/userlist |grep -v "# " /tmp/userlist
-
-# 合并 dnsmasq 缓存
-cat /tmp/userlist /tmp/fq > /tmp/hosts_fq
-
-# 删除 dnsmasq 缓存
-rm -rf /tmp/userlist
-rm -rf /tmp/fq
-rm -rf /tmp/fq.conf
-
-# 创建 dnsmasq 规则文件
-cat > /tmp/hosts_fq.conf <<EOF
-##########################################################
-## 域名自定义 dnsmasq 设置	【2017 by.lanse】	##
-##########################################################
-address=/localhost/127.0.0.1
-address=/localhost/::1
-address=/ip6-localhost/::1
-address=/ip6-loopback/::1
-# 以下示例.去“#”生效
-#address=/mit.ru/izmuroma.ru/10.25.11.30
-EOF
-
-# 去重排序规则
-sort -n /tmp/hosts_fq | uniq | sed -E -e "/^$/d" -e "s/[[:space:]][[:space:]]*/ /g" >> /tmp/hosts_fq.conf
-sleep 2
-# 修饰结束
-sed -i '$a # Modified DNS end' /tmp/hosts_fq.conf
-
-echo " 更新 hosts_fq 规则."
-if [ -f /tmp/hosts_fq.conf ]; then
-cat /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf | awk '{print$0}' | sort | uniq -u > /tmp/hosts_fq.txt; sleep 2
-	if [ ! -s "/tmp/hosts_fq.txt" ]; then
-		logger -t "【$LOGTIME】" "FQ 规则已为最新,无需更新..."
-		echo
-		echo -e "\e[1;33m FQ 已为最新规则无需更新.\e[0m" && rm -rf /tmp/hosts_fq.conf
-	else
-		logger -t "【$LOGTIME】" "最新 FQ 规则更新完成..."
-		echo
-		mv -f /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf && sleep 3
-	fi
+echo " 更新规则."
+if [ ! -f /tmp/hsfq_script.sh ]; then
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/OPT/master/hsfq_script.sh -O /tmp/hsfq_script.sh;chmod 775 /tmp/hsfq_script.sh
 else
-	logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
-	echo -e "\e[1;37m FQ 更新失败，重新启动更新任务\e[0m" && sh /tmp/tmp_fq_up
-fi
+	cat /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh |awk '{ print$0}' |sort |uniq -u >/tmp/hsfq_script.sh.txt && sleep 2
+	if [ ! -s "/tmp/hsfq_script.sh.txt" ]; then
+		logger -t "【$LOGTIME】" " 安装脚本已为最新,无需更新..."
+		echo -e "\e[1;33m Hosts 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hosts_ad.conf
+	else
+		mv -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
+		sh /etc/storage/dnsmasq.d/hsfq_script.sh
+	fi
+	sleep 2
+	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		logger -t "【$LOGTIME】" " FQ 开始启动翻墙去广告规则更新..."
+		[ -f /tmp/tmp_fq_up ] && rm -f /tmp/tmp_fq_up
+		[ -f /tmp/tmp_hs_up ] && rm -f /tmp/tmp_hs_up
+	fi
+	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		echo " 准备翻墙 FQ 文件 "
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -O \
+		/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up
+	fi
+	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		echo " 准备去广告 HOSTS 文件 "
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -O \
+		/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up
+		restart_dhcpd && /usr/sbin/dnsmasq restart 2>&1 >/dev/null
+		sleep 3
+		rm -rf /tmp/tmp_fq_up /tmp/tmp_hs_up
+	fi	
 
-# 删除临时合并缓存
-rm -f /tmp/hosts_fq.txt
-rm -rf /tmp/hosts_fq
+fi
+rm -f /tmp/hsfq_script.sh.txt  2>&1 >/dev/null
