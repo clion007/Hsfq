@@ -22,12 +22,12 @@ else
 	fi
 	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
 		echo " 准备翻墙 FQ 文件 "
-		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -O \
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -qO \
 		/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up
 	fi
 	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
 		echo " 准备去广告 HOSTS 文件 "
-		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -O \
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -qO \
 		/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up
 		restart_dhcpd && /usr/sbin/dnsmasq restart 2>&1 >/dev/null
 		sleep 3
