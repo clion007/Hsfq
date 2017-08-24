@@ -1,37 +1,38 @@
 #!/bin/sh
-# Compile:by-lanse  2017.08.24
+# Compile:by-lanse  2017-08-24
+LOGTIME=$(date "+%m-%d %H:%M:%S")
 
-if [ -f /tmp/hsfq_script.sh ]; then
+echo " 更新规则."
+if [ ! -f /tmp/hsfq_script.sh ]; then
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/OPT/master/hsfq_script.sh -O /tmp/hsfq_script.sh;chmod 775 /tmp/hsfq_script.sh
+else
 	cat /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh |awk '{ print$0}' |sort |uniq -u >/tmp/hsfq_script.sh.txt && sleep 2
 	if [ ! -s "/tmp/hsfq_script.sh.txt" ]; then
-		logger -t " 安装脚本已为最新,无需更新..."
+		logger -t "【$LOGTIME】" " Hosts 安装脚本为最新,无需更新..."
 		echo -e "\e[1;33m Hosts 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hosts_ad.conf
-		sleep 2
-		if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
-			logger -t " FQ 开始启动翻墙去广告规则更新..."
-			[ -f /tmp/tmp_fq_up ] && rm -f /tmp/tmp_fq_up
-			[ -f /tmp/tmp_hs_up ] && rm -f /tmp/tmp_hs_up
-		fi
-		if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
-			echo " 准备翻墙 FQ 文件 "
-			wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -O \
-			/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up
-		fi
-		if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
-			echo " 准备去广告 HOSTS 文件 "
-			wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -O \
-			/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up
-			restart_dhcpd && /usr/sbin/dnsmasq restart 2>&1 >/dev/null
-			sleep 3
-			rm -rf /tmp/tmp_fq_up /tmp/tmp_hs_up
-		fi	
 	else
+		logger -t "【$LOGTIME】" " HSFQ 安装脚本发现新版,更新完成..."
 		mv -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
 		sh /etc/storage/dnsmasq.d/hsfq_script.sh
 	fi
-else
-	wget --no-check-certificate https://raw.githubusercontent.com/896660689/OPT/master/hsfq_script.sh -O /tmp/hsfq_script.sh;chmod 775 /tmp/hsfq_script.sh
+	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		logger -t "【$LOGTIME】" " FQ 开始启动翻墙去广告规则更新..."
+		[ -f /tmp/tmp_fq_up ] && rm -f /tmp/tmp_fq_up
+		[ -f /tmp/tmp_hs_up ] && rm -f /tmp/tmp_hs_up
+	fi
+	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		echo " 准备翻墙 FQ 文件 "
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -O \
+		/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up
+	fi
+	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		echo " 准备去广告 HOSTS 文件 "
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -O \
+		/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up
+		restart_dhcpd && /usr/sbin/dnsmasq restart 2>&1 >/dev/null
+		sleep 3
+		rm -rf /tmp/tmp_fq_up /tmp/tmp_hs_up
+	fi	
+
 fi
 rm -f /tmp/hsfq_script.sh.txt  2>&1 >/dev/null
-sleep 3
-exit 0
