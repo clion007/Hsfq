@@ -18,7 +18,7 @@ echo
 wget --no-check-certificate -t 30 -T 80 https://raw.githubusercontent.com/896660689/Hsfq/master/hsabd -qO \
 /tmp/abd.conf && sleep 2 && chmod +x /tmp/abd.conf && . /tmp/abd.conf
 sleep 2
-echo -e " 导入自定义广告黑名单缓存规则 "
+# 导入自定义广告黑名单缓存规则
 cp /etc/storage/dnsmasq.d/blacklist /tmp/blacklist
 sed -i "/#/d" /tmp/blacklist
 sed -i 's/^/127.0.0.1 &/g' /tmp/blacklist
@@ -45,13 +45,13 @@ fi
 sed -i '/::1/d' /tmp/hosts_ad
 
 # 创建 hosts 规则文件
-echo "##########################################################
-## 自定义 hosts 设置 	【2017 by.lanse】		##
-##########################################################
+echo "## 自定义 hosts 设置	【2017 by.lanse】
+# Localhost (DO NOT REMOVE) Start
 127.0.0.1 localhost
 ::1	localhost
 ::1	ip6-localhost
 ::1	ip6-loopback
+# Localhost (DO NOT REMOVE) End
 # Example: hosts 设置例子:
 # 192.168.2.80		Boo" > /tmp/hosts_ad.conf
 
@@ -61,7 +61,7 @@ sleep 2
 # 修饰结束
 sed -i '$a # 修饰 hosts 结束' /tmp/hosts_ad.conf
 
-echo " 更新 hosts_ad 规则."
+echo -e "\033[41;37 更新 hosts_ad 规则 \e[0m"
 sleep 2
 if [ -f /tmp/hosts_ad.conf ]; then
 cat /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | awk '{print$0}' | sort | uniq -u > /tmp/hosts_ad.txt && sleep 2
