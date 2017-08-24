@@ -9,21 +9,21 @@ else
 	cat /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh |awk '{ print$0}' |sort |uniq -u >/tmp/hsfq_script.sh.txt && sleep 2
 	if [ ! -s "/tmp/hsfq_script.sh.txt" ]; then
 		logger -t "【$LOGTIME】" " Hosts 安装脚本为最新,无需更新..."
-		echo -e "\e[1;33m Hosts 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hosts_ad.conf
+		echo -e "\e[1;33m Hosts 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hsfq_script.sh.txt && sleep 2
 	else
 		logger -t "【$LOGTIME】" " HSFQ 安装脚本发现新版,更新完成..."
 		mv -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
-		sh /etc/storage/dnsmasq.d/hsfq_script.sh
+		sh /etc/storage/dnsmasq.d/hsfq_script.sh && sleep 2
 	fi
 	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
 		logger -t "【$LOGTIME】" " FQ 开始启动翻墙去广告规则更新..."
 		[ -f /tmp/tmp_fq_up ] && rm -f /tmp/tmp_fq_up
 		[ -f /tmp/tmp_hs_up ] && rm -f /tmp/tmp_hs_up
-	fi
-	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+		sleep 2
 		echo " 准备翻墙 FQ 文件 "
 		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -qO \
 		/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up
+		sleep 2
 	fi
 	if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
 		echo " 准备去广告 HOSTS 文件 "
@@ -35,4 +35,5 @@ else
 	fi	
 
 fi
-rm -f /tmp/hsfq_script.sh.txt  2>&1 >/dev/null
+echo
+
