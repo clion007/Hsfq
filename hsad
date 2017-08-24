@@ -1,6 +1,6 @@
 #!/bin/sh
 # Compile:by-lanse    2018-08-20
-
+echo
 echo -e "\e[1;36m 下载 'winhelp200''adblock' 屏蔽广告规则 \e[0m"
 TMP_AD=/tmp/tmp_ad
 AD=/tmp/ad
