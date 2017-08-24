@@ -24,7 +24,7 @@ wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wa
 sleep 2
 cat ${TMP_FQ4} ${TMP_FQ2} > ${FQ}
 #sort -n ${TMP_FQ} | uniq | sed -e "/# /d" -e "/\#a/d" -e "/\#s/d" -e "/#★/d" -e 1,2d >> ${FQ}
-
+[ ! $? -eq 0 ] && sh /tmp/fq.conf
 sleep 3
 echo -e "\033[45;37m 翻网规则下载完成 \033[0m"
 rm ${TMP_FQ2} ${TMP_FQ4} 2> /dev/null
