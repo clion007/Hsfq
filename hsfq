@@ -15,6 +15,7 @@ do
 	| sed -e "s/#.*$//" -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/\#s/d" -e "/#★/d" >> ${TMP_FQ2} 
 done
 echo
+[ $? -eq 0 ] || /tmp/fq.conf
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wangchunming/2017hosts/master/hosts-pc \
 | awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
 | sed -E -e "/#/d" -e "/^$/d" -e "/::/d" -e "/localhos/d" >> ${TMP_FQ4}
@@ -22,7 +23,7 @@ wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wa
 #| awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
 #| sed -E -e "/#/d" -e "/^$/d" -e "/::/d" -e "/localhos/d" >> ${TMP_FQ4}
 sleep 2
-cat ${TMP_FQ4} ${TMP_FQ2} > ${FQ}
+cat ${TMP_FQ4} ${TMP_FQ2} > ${FQ} || /tmp/fq.conf
 #sort -n ${TMP_FQ} | uniq | sed -e "/# /d" -e "/\#a/d" -e "/\#s/d" -e "/#★/d" -e 1,2d >> ${FQ}
 
 sleep 3
