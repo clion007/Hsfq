@@ -2,10 +2,12 @@
 # Compile:by-lanse    2018-08-24
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
+echo
 echo -e "\e[1;36m HOSTS 去广告规则开始下载... \e[0m"
 
 # 下载 HOSTS 组合规则
-echo -e "\e[1;36m 下载 'easylistchina' AD 规则 \e[0m"
+echo
+echo -e "\e[1;36m 下载 adblock 规则 \e[0m"
 wget --no-check-certificate -t 20 -T 60 -O- http://c.nnjsx.cn/GL/dnsmasq/update/adblock/easylistchina.txt \
 | awk '{if($0!=line)print; line=$0}' | sed -E -e "s/127.0.0.1$//" -e "s/address=\/./127.0.0.1\ /" -e "/#/d" -e "s/.$//" >> /tmp/Ad0.conf
 echo
