@@ -63,7 +63,7 @@ sleep 2
 # 修饰结束
 sed -i '$a # 修饰 hosts 结束' /tmp/hosts_ad.conf
 
-echo -e "\033[41;37 更新 hosts_ad 规则 \e[0m"
+echo -e "\033[41;33 更新 hosts_ad 规则 \033[0m"
 sleep 2
 if [ -f /tmp/hosts_ad.conf ]; then
 cat /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf | awk '{print$0}' | sort | uniq -u > /tmp/hosts_ad.txt && sleep 2
