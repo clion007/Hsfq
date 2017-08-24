@@ -11,7 +11,7 @@ wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/mas
 /tmp/fq.conf && sleep 2 && chmod +x /tmp/fq.conf && . /tmp/fq.conf
 echo
 # 添加用户自定规则缓存
-cp /etc/storage/dnsmasq.d/userlist /tmp/userlist
+cp /etc/storage/dnsmasq.d/userlist |grep -v "# " /tmp/userlist
 
 # 合并 dnsmasq 缓存
 cat /tmp/userlist /tmp/fq > /tmp/hosts_fq
@@ -20,9 +20,6 @@ cat /tmp/userlist /tmp/fq > /tmp/hosts_fq
 rm -rf /tmp/userlist
 rm -rf /tmp/fq
 rm -rf /tmp/fq.conf
-
-# 删除注释
-sed -i '/# /d' /tmp/hosts_fq
 
 # 创建 dnsmasq 规则文件
 cat > /tmp/hosts_fq.conf <<EOF
