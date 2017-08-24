@@ -18,7 +18,7 @@ else
 	fi
 fi
 if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
-	logger -t "【$LOGTIME】" " FQ 开始启动翻墙去广告规则更新..."
+	logger -t "【$LOGTIME】" " 开始运行翻墙去广告更新任务..."
 	[ -f /tmp/tmp_fq_up ] && rm -f /tmp/tmp_fq_up
 	[ -f /tmp/tmp_hs_up ] && rm -f /tmp/tmp_hs_up
 	sleep 2
