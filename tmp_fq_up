@@ -3,7 +3,7 @@
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
-
+echo
 echo -e "\e[1;36m FQ 翻墙规则开始下载... \e[0m"
 
 # 下载 FQ 组合规则
@@ -42,6 +42,7 @@ sleep 2
 sed -i '$a # Modified DNS end' /tmp/hosts_fq.conf
 
 echo " 更新 hosts_fq 规则."
+echo
 if [ -f /tmp/hosts_fq.conf ]; then
 cat /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf |awk '{ print$0}' |sort |uniq -u > /tmp/hosts_fq.txt; sleep 2
 	if [ ! -s "/tmp/hosts_fq.txt" ]; then
