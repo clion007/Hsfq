@@ -1,7 +1,7 @@
 #!/bin/sh
 # Compile:by-lanse    2018-08-20
-
-echo -e "\e[1;36m 下载 'sy618''vokins''noadhosts' 翻网规则 \e[0m"
+echo
+echo -e "\e[1;36m 下载 Fq 翻网规则 \e[0m"
 TMP_FQ=/tmp/tmp_fq
 TMP_FQ2=/tmp/tmp_fq2
 TMP_FQ4=/tmp/tmp_fq4
