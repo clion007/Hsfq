@@ -119,7 +119,6 @@ fi
 
 if [ -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m"
-	## 配置dnsmasq.conf启动规则
 	grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
