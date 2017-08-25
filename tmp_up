@@ -12,7 +12,7 @@ if [ ! -f /tmp/hsfq_script_up.sh ]; then
 	else
 		cp -f /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh
 		mv -f /tmp/hsfq_script_up.sh /tmp/hsfq_script.sh && rm -f /tmp/hsfq_script_up.txt
-		echo -e "\033[41;37m 新版脚本更新完成.须重新安装程序.\033[0m"
+		echo -e "\033[41;37m新版脚本更新完成.须重新安装程序\033[0m"
 		echo
 		sleep 5
 		echo
