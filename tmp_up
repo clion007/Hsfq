@@ -9,10 +9,11 @@ if [ ! -f /tmp/hsfq_script_up.sh ]; then
 	cat /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh | awk '{ print$0}' | sort | uniq -u >/tmp/hsfq_script_up.sh.txt && sleep 2
 	if [ ! -s "/tmp/hsfq_script_up.sh.txt" ]; then
 		logger -t "【$LOGTIME】" " HSFQ 安装脚本为最新,无需更新..."
-		echo -e "\e[1;33m HSFQ 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hsfq_script.sh.txt && sleep 2
+		echo -e "\e[1;33m HSFQ 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hsfq_script_up.sh.txt && sleep 2
 	else
 		logger -t "【$LOGTIME】" " HSFQ 安装脚本新版更新完成启动运行..."
-		mv -f /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh
+		mv -f /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh && rm -f /tmp/hsfq_script_up.sh.txt
+	
 		echo -e "\e[1;33m HSFQ 安装脚本新版更新完成启动运行.\e[0m"
 		sh /etc/storage/dnsmasq.d/hsfq_script.sh && sleep 2
 	fi
