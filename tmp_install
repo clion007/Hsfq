@@ -150,7 +150,7 @@ conf-dir=/etc/storage/dnsmasq.d/conf/
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
 	echo
 	sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
-	rm /tmp/tmp_dnsmasq rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
+	rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
 fi
 
 if [ -f "/etc/storage/post_iptables_script.sh" ]; then
