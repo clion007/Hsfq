@@ -132,7 +132,7 @@ if [ "$Function_options" == "6" ]; then
 
 	[ -f "/tmp/hsfq_ssad.sh" ] && rm -f /tmp/hsfq_ssad.sh
 	echo -e "\e[1;34m--纯净去广告卸载完毕,返回主菜单--\e[0m" && sleep 3
-  echo
+	sh /tmp/hsfq_install
 fi
 echo
 if [ "$Function_options" == "7" ]; then
