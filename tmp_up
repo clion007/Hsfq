@@ -4,7 +4,7 @@ LOGTIME=$(date "+%m-%d %H:%M:%S")
 echo
 echo " 检测脚本版本."
 if [ ! -f /tmp/hsfq_script_up.sh ]; then
-	wget --no-check-certificate https://raw.githubusercontent.com/896660689/OPT/master/hsfq_script.sh -O /tmp/hsfq_script_up.sh;chmod 775 /tmp/hsfq_script_up.sh
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq_script.sh -O /tmp/hsfq_script_up.sh;chmod 775 /tmp/hsfq_script_up.sh
 	echo
 	cat /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh | awk '{ print$0}' | sort | uniq -u > /tmp/hsfq_script_up.txt && sleep 2
 	if [ ! -s "/tmp/hsfq_script_up.txt" ]; then
