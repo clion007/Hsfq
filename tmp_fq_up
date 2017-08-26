@@ -45,7 +45,7 @@ echo -e "\033[41;33m 更新 hosts_fq 规则 规则\033[0m"
 echo
 if [ -f /tmp/hosts_fq.conf ]; then
 	[ -f "/tmp/hosts_fq.txt" ] && rm -f /tmp/hosts_fq.txt
-	cat /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf |awk '{ print$0}' |sort |uniq -u > /tmp/hosts_fq.txt;sleep 2
+	echo | awk '{print$0}' /tmp/hosts_fq.conf /etc/storage/dnsmasq.d/conf/hosts_fq.conf | sort | uniq -u > /tmp/hosts_fq.txt;sleep 2
 	if [ $? -eq 0 ];then
 		if [ ! -s "/tmp/hosts_fq.txt" ]; then
 			logger -t "【$LOGTIME】" "FQ 规则已为最新,无需更新..."
