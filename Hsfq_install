@@ -28,7 +28,7 @@ read Function_options
 if [ "$Function_options" == "1" ]; then
 	echo
 	[ -f /tmp/hsfq_script.sh ] && rm -rf /tmp/hsfq_script.sh
-	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/Hsfq_install -O /tmp/hsfq_script.sh && chmod +x /tmp/hsfq_script.sh && . /tmp/hsfq_script.sh
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq_script.sh -O /tmp/hsfq_script.sh && chmod +x /tmp/hsfq_script.sh && . /tmp/hsfq_script.sh
 	echo
 fi
 echo
