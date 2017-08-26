@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse	2017-08-26
+# Compile:by-lanse	2017-08-27
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
 CRON_FILE=/etc/storage/cron/crontabs/$username
@@ -92,6 +92,7 @@ if [ "$Function_options" == "4" ]; then
 	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/ss_ad.sh -O \
 	/tmp/hsfq_ssad.sh && chmod +x /tmp/hsfq_ssad.sh && . /tmp/hsfq_ssad.sh
 	echo
+	sh /tmp/hsfq_install
 fi
 echo
 if [ "$Function_options" == "5" ]; then
