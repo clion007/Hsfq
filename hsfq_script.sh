@@ -36,7 +36,7 @@ echo -e "\e[1;36m 创建 DNS 配置文件 \e[0m"
 if [ ! -f "/etc/storage/dnsmasq.d/resolv.conf" ]; then
 	cat > /etc/storage/dnsmasq.d/resolv.conf <<EOF
 ## DNS解析服务器设置
-# nameserver 127.0.0.1
+nameserver 127.0.0.1
 ## 根据网络环境选择DNS.最多6个地址按速排序
 nameserver 223.6.6.6
 nameserver 8.8.4.4
