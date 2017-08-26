@@ -127,7 +127,7 @@ fi
 chmod 644 /etc/storage/dnsmasq.d/whitelist
 
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
-	echo -e "\e[1;31m 添加定时计划更新任务 \e[0m"
+	echo -e "\e[1;33m 添加定时计划更新任务 \e[0m"
 	sed -i '/hsfq_update.sh/d' /etc/storage/cron/crontabs/$username
 	sed -i '$a 45 05 * * 2,4,6 /bin/sh /etc/storage/dnsmasq.d/hsad_update.sh' /etc/storage/cron/crontabs/$username
 	killall crond;/usr/sbin/crond
