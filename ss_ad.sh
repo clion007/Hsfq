@@ -1,5 +1,5 @@
 #!/bin/sh
-# by lanse
+# Compile:by-lanse    2018-08-27
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 
@@ -86,6 +86,7 @@ if [ -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	sed -i '$a addn-hosts=/etc/storage/bin/hosts' /etc/storage/dnsmasq/dnsmasq.conf
 	killall crond;/usr/sbin/crond
 sleep 2
+fi
 
 # 删除临时文件
 rm -f /tmp/hosts_ad.txt
