@@ -9,7 +9,7 @@ sleep 3
 if [ ! -d "/etc/storage/dnsmasq.d" ]; then
 	echo -e "\e[1;36m 创建 dnsmasq 规则脚本文件夹 \e[0m"
 	mkdir -p -m 755 /etc/storage/dnsmasq.d
-	cp -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
+	cp -f /tmp/hsfq_install /etc/storage/dnsmasq.d/hsfq_install
 fi
 
 if [ ! -f "/etc/storage/dnsmasq.d/userlist" ]; then
