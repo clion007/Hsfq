@@ -50,9 +50,9 @@ sed -i '/::1/d' /tmp/hosts_ad
 echo "## 自定义 hosts 设置	【2017 by.lanse】
 # Localhost (DO NOT REMOVE) Start
 127.0.0.1 localhost
-#::1	localhost
+# ::1	localhost
 ::1	ip6-localhost
-#::1	ip6-loopback
+# ::1	ip6-loopback
 # Localhost (DO NOT REMOVE) End
 # Example: hosts 设置例子:
 # 192.168.2.80		Boo" > /tmp/hosts_ad.conf
