@@ -11,8 +11,8 @@ cp -f /tmp/hsfq_ssad.sh /etc/storage/bin/hsfq_ssad.sh
 
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 	echo -e "\e[1;31m 添加定时计划更新任务 \e[0m"
-	sed -i '/ss_ad.sh/d' /etc/storage/cron/crontabs/$username
-	sed -i '$a 45 05 * * 2,4,6 /bin/sh /etc/storage/bin/ss_ad.sh' /etc/storage/cron/crontabs/$username
+	sed -i '/hsfq_ssad/d' /etc/storage/cron/crontabs/$username
+	sed -i '$a 45 05 * * 2,4,6 /bin/sh /etc/storage/bin/hsfq_ssad.sh' /etc/storage/cron/crontabs/$username
 	killall crond;/usr/sbin/crond
 fi
 
@@ -80,7 +80,7 @@ if [ -f /tmp/hosts_ad.conf ]; then
  		else
 			logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 			echo
-		 	&& /bin/sh /etc/storage/bin/ss_ad.sh
+		 	/bin/sh /etc/storage/bin/hsfq_ssad.sh
 	 		echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
  	 	fi
  	fi
