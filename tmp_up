@@ -3,15 +3,15 @@
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 echo
 echo " 检测脚本版本."
-if [ ! -f /tmp/hsfq_script_up.sh ]; then
-	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq_script.sh -O /tmp/hsfq_script_up.sh;chmod 775 /tmp/hsfq_script_up.sh
+if [ ! -f /tmp/hsfq_install_up.sh ]; then
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master//tmp/hsfq_install -O /tmp/hsfq_install_up.sh;chmod 775 /tmp/hsfq_install_up.sh
 	echo
-	cat /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh | awk '{ print$0}' | sort | uniq -u > /tmp/hsfq_script_up.txt && sleep 2
-	if [ ! -s "/tmp/hsfq_script_up.txt" ]; then
-		echo -e "\e[1;33m HSFQ 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hsfq_script_up.sh && rm -f /tmp/hsfq_script_up.txt
+	cat /tmp/hsfq_installt_up.sh /etc/storage/dnsmasq.d/hsfq_install | awk '{ print$0}' | sort | uniq -u > /tmp/hsfq_install_up.txt && sleep 2
+	if [ ! -s "/tmp/hsfq_install_up.txt" ]; then
+		echo -e "\e[1;33m HSFQ 安装脚本已为最新,无需更新.\e[0m" && rm -f /tmp/hsfq_install_up.sh && rm -f /tmp/hsfq_install_up.txt
 	else
-		cp -f /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh
-		mv -f /tmp/hsfq_script_up.sh /tmp/hsfq_script.sh && rm -f /tmp/hsfq_script_up.txt
+		cp -f /tmp/hsfq_install_up.sh /etc/storage/dnsmasq.d/hsfq_install
+		mv -f /tmp/hsfq_install_up.sh /tmp/hsfq_install_up.sh && rm -f hsfq_install_up.txt
 		echo -e "\033[41;37m新版脚本更新完成.须重新安装程序\033[0m"
 		echo
 		sleep 5
