@@ -153,7 +153,7 @@ if [ ! -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	else
 		echo -e "\033[41;37m 开始写入启动代码 \e[0m"
 	fi
-	echo "listen-address=${route_vlan},127.0.0.1
+	echo "# listen-address=${route_vlan},127.0.0.1
 # 添加监听地址
 # 开启日志选项
 log-queries
