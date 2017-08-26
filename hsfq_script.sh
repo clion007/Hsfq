@@ -195,12 +195,12 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 	sed -i '$a sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh
 fi
-[ -f /tmp/fqhs_an.sh ] && rm -rf /tmp/fqhs_an.sh
-sleep 3
+echo
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "+                 installation is complete                 +"
 echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-sh /tmp/hsfq_script.sh
+sleep 3
+sh /tmp/hsfq_install
 echo
