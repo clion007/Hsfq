@@ -28,7 +28,8 @@ read Function_options
 if [ "$Function_options" == "1" ]; then
 	echo
 	[ -f /tmp/hsfq_script.sh ] && rm -rf /tmp/hsfq_script.sh
-	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq_script.sh -O /tmp/hsfq_script.sh && chmod +x /tmp/hsfq_script.sh && . /tmp/hsfq_script.sh
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq_script.sh -O \
+	/tmp/hsfq_script.sh && chmod +x /tmp/hsfq_script.sh && . /tmp/hsfq_script.sh
 	echo
 fi
 echo
@@ -88,7 +89,8 @@ echo
 if [ "$Function_options" == "4" ]; then
 	echo
 	[ -f /tmp/hsfq_script.sh ] && rm -rf /tmp/hsfq_script.sh
-	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/ss_ad.sh -O /tmp/hsfq_ssad.sh && chmod +x /tmp/hsfq_ssad.sh && . /tmp/hsfq_ssad.sh
+	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/ss_ad.sh -O \
+	/tmp/hsfq_ssad.sh && chmod +x /tmp/hsfq_ssad.sh && . /tmp/hsfq_ssad.sh
 	echo
 fi
 echo
