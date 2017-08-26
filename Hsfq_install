@@ -116,14 +116,15 @@ if [ "$Function_options" == "6" ]; then
 	if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 		echo -e "\e[1;31m 删除更新计划任务 \e[0m"
 		sleep 2
-		sed -i '/ss_ad.sh/d' /etc/storage/cron/crontabs/$username
+		sed -i '/hsfq_ssad/d' /etc/storage/cron/crontabs/$username
 		killall crond;/usr/sbin/crond
 	fi
 
 	if [ -d "/etc/storage/bin/hosts" ]; then
 		echo -e "\e[1;31m 删除残留文件夹以及配置 \e[0m"
 		sleep 2
-		rm -rf /etc/storage/bin
+		rm -rf /etc/storage/bin/hosts
+		rm -rf /etc/storage/bin/hsfq_ssad.sh
 	fi
 
 	if [ -f "/usr/sbin/dnsmasq" ]; then
