@@ -22,10 +22,6 @@ log-queries
 log-facility=/var/log/dnsmasq.log
 # 异步log,缓解阻塞，提高性能。默认为5，最大为100
 log-async=50
-# 关闭内置hosts，配合启用第三方hosts
-no-hosts
-# DNS服务器严格按顺序使用
-strict-order
 # 缓存最长时间
 min-cache-ttl=1800
 # 指定服务器'域名''地址'文件夹
