@@ -83,7 +83,7 @@ fi
 
 if [ -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	echo -e "\e[1;31m 添加自定义 hosts 启动路径 \e[0m"
-	sed -i '/ss_ad.sh/d' /etc/storage/dnsmasq/dnsmasq.conf
+	sed -i '/addn-hosts/d' /etc/storage/dnsmasq/dnsmasq.conf
 	sed -i '$a addn-hosts=/etc/storage/bin/hosts' /etc/storage/dnsmasq/dnsmasq.conf
 	killall crond;/usr/sbin/crond
 sleep 2
