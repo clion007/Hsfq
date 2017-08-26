@@ -6,8 +6,9 @@ route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " 
 if [ ! -d "/etc/storage/bin/hosts" ]; then
 	echo -e "\e[1;36m 创建广告规则文件夹 \e[0m"
 	mkdir -p -m 755 /etc/storage/bin/hosts
-	cp -f /tmp/hsfq_ssad.sh /etc/storage/bin/hsfq_ssad.sh
 fi
+cp -f /tmp/hsfq_ssad.sh /etc/storage/bin/hsfq_ssad.sh
+
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 	echo -e "\e[1;31m 添加定时计划更新任务 \e[0m"
 	sed -i '/ss_ad.sh/d' /etc/storage/cron/crontabs/$username
