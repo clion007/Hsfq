@@ -65,7 +65,7 @@ echo " 更新 hosts_ad 规则."
 echo
 if [ -f /tmp/hosts_ad.conf ]; then
 	[ -f "/tmp/hosts_ad.txt" ] && rm -f /tmp/hosts_ad.txt
-	cat /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf |awk '{ print$0}' |sort |uniq -u > /tmp/hosts_ad.txt;sleep 2
+	echo | awk '{print$0}' /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf | sort | uniq -u > /tmp/hosts_ad.txt;sleep 2
 	if [ $? -eq 0 ];then
 		if [ ! -s "/tmp/hosts_ad.txt" ]; then
 			logger -t "【$LOGTIME】" "Hosts 规则已为最新,无需更新..."
