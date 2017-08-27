@@ -61,17 +61,23 @@ if [ -f /tmp/hosts_fq.conf ]; then
 			else
 				logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
 				echo
-				sh /tmp/tmp_fq_up
 				echo -e "\e[1;37m FQ 更新失败，重新启动更新任务\e[0m"
+				wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -qO \
+				/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up;sleep 2 && rm -f /tmp/tmp_fq_up
+				echo
 			fi
 		fi
 	else
 		logger -t "【$LOGTIME】" "FQ 更新失败，重新启动更新任务..."
 		echo
-		echo -e "\e[1;37m FQ 更新失败，重新启动更新任务\e[0m" && sh /tmp/tmp_fq_up
+		echo -e "\e[1;37m FQ 更新失败，重新启动更新任务\e[0m"
+		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_fq_up -qO \
+		/tmp/tmp_fq_up && chmod 755 /tmp/tmp_fq_up && . /tmp/tmp_fq_up;sleep 2 && rm -f /tmp/tmp_fq_up
+		echo
 	fi
 fi
 
 # 删除临时合并缓存
 rm -f /tmp/hosts_fq.txt
 rm -rf /tmp/hosts_fq
+echo
