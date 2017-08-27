@@ -56,13 +56,13 @@ sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf
 if [ ! -d "/etc/storage/dnsmasq.d/conf" ]; then
 	echo -e "\e[1;36m 创建 'FQ' 文件 \e[0m"
 	mkdir -p /etc/storage/dnsmasq.d/conf
-	echo "address=/localhost/127.0.0.1" > /etc/storage/dnsmasq.d/conf/hosts_fq.conf
+	echo "address=/localhost/127.0.0.1" > /etc/storage/dnsmasq.d/conf/hosts_fq.conf && chmod 644 /etc/storage/dnsmasq.d/conf/hosts_fq.conf
 fi
 
 if [ ! -d "/etc/storage/dnsmasq.d/hosts" ]; then
 	echo -e "\e[1;36m 创建 'HOSTS' 文件 \e[0m"
 	mkdir -p /etc/storage/dnsmasq.d/hosts
-	echo "127.0.0.1 localhost" > /etc/storage/dnsmasq.d/hosts/hosts_ad.conf
+	echo "127.0.0.1 localhost" > /etc/storage/dnsmasq.d/hosts/hosts_ad.conf && chmod 644 /etc/storage/dnsmasq.d/hosts/hosts_ad.conf
 fi
 
 echo -e "\e[1;36m 创建自定义广告黑名单 \e[0m"
