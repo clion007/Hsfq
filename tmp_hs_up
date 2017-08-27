@@ -98,3 +98,4 @@ fi
 # 删除临时文件
 rm -rf /tmp/hosts_ad
 rm -f /tmp/hosts_ad.txt
+echo
