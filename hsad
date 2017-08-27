@@ -12,7 +12,6 @@ for URL in \
 	"http://winhelp2002.mvps.org/hosts.txt" \
 	"http://77l5b4.com1.z0.glb.clouddn.com/hosts.txt" \
 	"https://hosts-file.net/ad_servers.txt" \
-	"http://www.malwaredomainlist.com/hostslist/hosts.txt"
 do
 	wget -t 15 -T 50 --no-check-certificate -O- "${URL}" \
 	| sed -E -e "s/#.*$//" -e "/^$/d" -e "/::/d" -e "/localhos/d" -e "s/0.0.0.0/127.0.0.1/" -e "s/[[:space:]][[:space:]]*/ /g" >> ${TMP_AD}
