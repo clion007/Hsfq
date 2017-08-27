@@ -41,7 +41,7 @@ sleep 2
 # 修饰结束
 sed -i '$a # Modified DNS end' /tmp/hosts_fq.conf
 
-echo -e "\033[41;33m 更新 hosts_fq 规则 规则\033[0m"
+echo -e "\033[41;33m 更新 hosts_fq 规则\033[0m"
 echo
 if [ -f /tmp/hosts_fq.conf ]; then
 	[ -f "/tmp/hosts_fq.txt" ] && rm -f /tmp/hosts_fq.txt
