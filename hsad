@@ -25,7 +25,6 @@ wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/xi
 echo
 cat ${TMP_AD} ${TMP_AD2} ${TMP_AD4} > ${AD} && sed -i "/^@/d" ${AD}
 #sort -n ${TMP_AD} |uniq >> ${AD}
-[ $? -eq 0 ] || sh /tmp/ad.conf
 sleep 2
 echo -e "\033[45;37m 'Hosts_Ad' 规则下载完成 \033[0m"
 rm ${TMP_AD} ${TMP_AD2} ${TMP_AD4} 2> /dev/null
