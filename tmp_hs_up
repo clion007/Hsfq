@@ -7,26 +7,27 @@ echo -e "\e[1;36m HOSTS 去广告规则开始下载... \e[0m"
 
 # 下载 HOSTS 组合规则
 echo
-echo -e "\e[1;36m 下载 adblock 规则 \e[0m"
-wget --no-check-certificate -t 20 -T 60 -O- http://c.nnjsx.cn/GL/dnsmasq/update/adblock/easylistchina.txt \
-| awk '{if($0!=line)print; line=$0}' | sed -E -e "s/127.0.0.1$//" -e "s/address=\/./127.0.0.1\ /" -e "/#/d" -e "s/.$//" >> /tmp/Ad0.conf
-echo
+#echo -e "\e[1;36m 下载 adblock 规则 \e[0m"
+#wget --no-check-certificate -t 20 -T 60 -O- http://c.nnjsx.cn/GL/dnsmasq/update/adblock/easylistchina.txt \
+#| awk '{if($0!=line)print; line=$0}' | sed -E -e "s/127.0.0.1$//" -e "s/address=\/./127.0.0.1\ /" -e "/#/d" -e "s/.$//" >> /tmp/Ad0.conf
+#echo
 echo -e "\033[41;37m 组合下载时间较长.请耐心等待……\033[0m"
 echo
 wget --no-check-certificate -t 30 -T 80 https://raw.githubusercontent.com/896660689/Hsfq/master/hsad -qO \
 /tmp/ad.conf && sleep 2 && chmod +x /tmp/ad.conf && . /tmp/ad.conf
 echo
-# 下载 '网络收集' HOSTS 规则
-wget --no-check-certificate -t 30 -T 80 https://raw.githubusercontent.com/896660689/Hsfq/master/hsabd -qO \
-/tmp/abd.conf && sleep 2 && chmod +x /tmp/abd.conf && . /tmp/abd.conf
-sleep 2
+## 下载 '网络收集' HOSTS 规则
+#wget --no-check-certificate -t 30 -T 80 https://raw.githubusercontent.com/896660689/Hsfq/master/hsabd -qO \
+#/tmp/abd.conf && sleep 2 && chmod +x /tmp/abd.conf && . /tmp/abd.conf
+#sleep 2
 # 导入自定义广告黑名单缓存规则
 cp /etc/storage/dnsmasq.d/blacklist /tmp/blacklist
 sed -i "/#/d" /tmp/blacklist
 sed -i 's/^/127.0.0.1 &/g' /tmp/blacklist
 
 # 合并 hosts 缓存
-cat /tmp/blacklist /tmp/Ad0.conf /tmp/ad /tmp/abd > /tmp/hosts_ad
+cat /tmp/blacklist /tmp/ad > /tmp/hosts_ad
+#cat /tmp/blacklist /tmp/Ad0.conf /tmp/ad /tmp/abd > /tmp/hosts_ad
 
 # 删除 hosts 缓存
 rm -rf /tmp/blacklist
