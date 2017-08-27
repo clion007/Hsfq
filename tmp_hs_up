@@ -76,7 +76,8 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			echo -e "\e[1;33m Hosts 已为最新规则无需更新.\e[0m" && rm -f /tmp/hosts_ad.conf
 		else
 			echo
-			mv -f /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf && sleep 3
+                        [ -f "/etc/storage/dnsmasq.d/hosts/hosts_ad.conf" ] && rm -f /etc/storage/dnsmasq.d/hosts/hosts_ad.conf
+                        mv -f /tmp/hosts_ad.conf /etc/storage/dnsmasq.d/hosts/hosts_ad.conf && sleep 3
 			if [ $? -eq 0 ]; then
 				logger -t "【$LOGTIME】" "最新 Hosts 规则更新完成..."
 				echo
