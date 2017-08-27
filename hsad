@@ -11,6 +11,7 @@ TMP_AD2=/tmp/tmp_ad2
 for URL in \
 	"http://winhelp2002.mvps.org/hosts.txt" \
 	"http://77l5b4.com1.z0.glb.clouddn.com/hosts.txt" \
+	"https://raw.githubusercontent.com/896660689/Hsfq/master/adaway.txt" \
 	"https://hosts-file.net/ad_servers.txt"
 do
 	wget -t 15 -T 50 --no-check-certificate -O- "${URL}" \
