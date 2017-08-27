@@ -86,8 +86,7 @@ if [ -f /tmp/hosts_ad.conf ]; then
 				logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 				echo
 				echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
-				wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -qO \
-				/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up;sleep 2 && rm -f /tmp/tmp_hs_up
+				sh /tmp/tmp_ad_up
 				echo
 			fi
 		fi
@@ -95,8 +94,7 @@ if [ -f /tmp/hosts_ad.conf ]; then
 		logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 		echo
 		echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
-		wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -qO \
-		/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up;sleep 2 && rm -f /tmp/tmp_hs_up
+		sh /tmp/tmp_ad_up
 		echo
 	fi
 fi
@@ -104,4 +102,5 @@ fi
 # 删除临时文件
 rm -rf /tmp/hosts_ad
 rm -f /tmp/hosts_ad.txt
+rm -rf /tmp/tmp_ad_up
 echo
