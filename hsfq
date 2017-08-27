@@ -20,7 +20,7 @@ wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wa
 | awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
 | sed -E -e "/#/d" -e "/^$/d" -e "/::/d" -e "/localhos/d" >> ${TMP_FQ3}
 echo
-cat ${TMP_FQ3} ${TMP_FQ} > ${FQ} && sed -i "/address=//\/d" ${FQ}
+cat ${TMP_FQ3} ${TMP_FQ} > ${FQ} && sed -i "/address=\/\//d" ${FQ}
 [ $? -eq 0 ] || sh /tmp/fq.conf
 sleep 3
 echo -e "\033[45;37m 翻网规则下载完成 \033[0m"
