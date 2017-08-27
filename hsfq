@@ -13,7 +13,7 @@ for URL in \
 	"https://raw.githubusercontent.com/vokins/yhosts/master/dnsmasq/ip.conf"
 do
 	wget --no-check-certificate -t 15 -T 50 -O- "${URL}" \
-	| sed -e "s/#.*$//" -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/\#s/d" -e "/#★/d" >> ${FQ}
+	| sed -e "s/#.*$//" -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/\#s/d" -e "/#★/d" >> ${TMP_FQ}
 done
 echo
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wangchunming/2017hosts/master/hosts-pc \
