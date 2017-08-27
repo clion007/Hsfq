@@ -84,14 +84,14 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			else
 				logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 				echo
-				sh /tmp/tmp_fq_up
+				sh /tmp/tmp_ad_up
 				echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
 			fi
 		fi
 	else
 		logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 		echo
-		echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m" && sh /tmp/tmp_fq_up
+		echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m" && sh /tmp/tmp_ad_up
 	fi
 fi
 
