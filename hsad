@@ -15,14 +15,17 @@ for URL in \
 do
 	wget -t 15 -T 50 --no-check-certificate -O- "${URL}" \
 	| sed -E -e "s/#.*$//" -e "/^$/d" -e "/::/d" -e "/localhos/d" -e "s/0.0.0.0/127.0.0.1/" -e "s/[[:space:]][[:space:]]*/ /g" >> ${TMP_AD}
-	[ $? -eq 0 ] || sh /tmp/ad.conf
 done
 echo
 wget -t 15 -T 50 --no-check-certificate -O- https://raw.githubusercontent.com/vokins/yhosts/master/hosts.txt \
 | sed -E -e "s/#.*$//" -e "/^$/d" -e "/::/d" -e "/localhos/d" -e "s/[[:space:]][[:space:]]*/ /g" >> ${TMP_AD2}
 echo
-cat ${TMP_AD} ${TMP_AD2} > ${AD}
+wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP-FX.txt \
+| grep ^\|\|[^\*]*\^$ | sed -e "s:||:127.0.0.1 :"  -e "s/.$//" >> ${TMP_AD4}
+echo
+cat ${TMP_AD} ${TMP_AD2} ${TMP_AD4} > ${AD} && sed -i "/^@/d" ${AD}
 #sort -n ${TMP_AD} |uniq >> ${AD}
+[ $? -eq 0 ] || sh /tmp/ad.conf
 sleep 2
 echo -e "\033[45;37m 'Hosts_Ad' 规则下载完成 \033[0m"
-rm ${TMP_AD} ${TMP_AD2} 2> /dev/null
+rm ${TMP_AD} ${TMP_AD2} ${TMP_AD4} 2> /dev/null
