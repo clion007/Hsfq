@@ -81,6 +81,7 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			if [ $? -eq 0 ]; then
 				logger -t "【$LOGTIME】" "最新 Hosts 规则更新完成..."
 				echo
+				rm -f /tmp/tmp_ad3
 				echo -e "\e[1;33m Hosts 最新 Hosts 规则更新完成.\e[0m" && rm -f /tmp/hosts_ad.conf
 			else
 				logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
