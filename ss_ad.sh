@@ -74,9 +74,9 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			echo -e "\e[1;33m Hosts 已为最新规则无需更新.\e[0m" && rm -f /tmp/hosts_ad.conf
 		else
 			echo
-			mv -f /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf && sleep 3
+			mv -f /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf
 			if [ $? -eq 0 ]; then
-				echo
+				echo -e "\e[1;33m Hosts 最新 Hosts 规则更新完成.\e[0m" && rm -f /tmp/hosts_ad.conf
 				logger -t "【$LOGTIME】" "最新 Hosts 规则更新完成..."
 			else
 				logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
