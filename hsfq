@@ -3,6 +3,7 @@
 echo
 echo -e "\e[1;36m 下载 Fq 翻网规则 \e[0m"
 TMP_FQ=/tmp/tmp_fq
+TMP_FQ3=/tmp/tmp_fq3
 FQ=/tmp/fq
 [ -f ${FQ} ] && rm -rf ${FQ}
 for URL in \
@@ -14,7 +15,14 @@ do
 	wget --no-check-certificate -t 15 -T 50 -O- "${URL}" \
 	| sed -e "s/#.*$//" -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/\#s/d" -e "/#★/d" >> ${FQ}
 done
+echo
+wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wangchunming/2017hosts/master/hosts-pc \
+| awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
+| sed -E -e "/#/d" -e "/^$/d" -e "/::/d" -e "/localhos/d" >> ${TMP_FQ3}
+echo
+cat ${TMP_FQ3} ${TMP_FQ} > ${FQ} && sed -i "/address=//\/d" ${FQ}
+[ $? -eq 0 ] || sh /tmp/fq.conf
 sleep 3
 echo -e "\033[45;37m 翻网规则下载完成 \033[0m"
 echo
-#rm ${TMP_FQ} 2> /dev/null
+rm ${TMP_FQ} ${TMP_FQ3} 2> /dev/null
