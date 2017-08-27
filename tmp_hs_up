@@ -84,7 +84,8 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			else
 				logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 				echo
-				sh /tmp/tmp_ad_up
+				wget --no-check-certificate -t 10 -T 30 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_hs_up -qO \
+				/tmp/tmp_hs_up && chmod 755 /tmp/tmp_hs_up && . /tmp/tmp_hs_up;sleep 2 && rm -f /tmp/tmp_hs_up
 				echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
 			fi
 		fi
