@@ -6,7 +6,7 @@ route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " 
 if [ ! -d "/etc/storage/bin/hosts" ]; then
 	echo -e "\e[1;36m 创建广告规则文件夹 \e[0m"
 	mkdir -p -m 755 /etc/storage/bin/hosts
-	echo "127.0.0.1 localhost" > /etc/storage/bin/hosts/hosts.conf
+	echo "127.0.0.1 localhost" > /etc/storage/bin/hosts/hosts.conf && chmod 644 /etc/storage/bin/hosts/hosts.conf
 fi
 cp -f /tmp/hsfq_ssad.sh /etc/storage/bin/hsfq_ssad.sh
 
@@ -76,7 +76,6 @@ if [ -f /tmp/hosts_ad.conf ]; then
 			echo
 			mv -f /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf && sleep 3
 			if [ $? -eq 0 ]; then
-				chmod 644 /etc/storage/bin/hosts/hosts.conf
 				echo
 				logger -t "【$LOGTIME】" "最新 Hosts 规则更新完成..."
 			else
