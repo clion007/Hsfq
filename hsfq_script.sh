@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse	2017-08-26
+# Compile:by-lanse	2017-08-27
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
 echo
@@ -142,18 +142,18 @@ echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m"
 [ -f /var/log/dnsmasq.log ] && rm /var/log/dnsmasq.log
 [ -f /tmp/tmp_dnsmasq ] && rm /tmp/tmp_dnsmasq
 if [ ! -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
+	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_dnsmasq -qO /tmp/tmp_dnsmasq
+	chmod 777 /tmp/tmp_dnsmasq && sh /tmp/tmp_dnsmasq	
+else
 	grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/no-hosts/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/strict-order/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf	
 		sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
 	else
 		echo -e "\033[41;37m 开始写入启动代码 \e[0m"
-	fi
-	echo "listen-address=${route_vlan},127.0.0.1
+		echo "listen-address=${route_vlan},127.0.0.1
 # 添加监听地址
 # 开启日志选项
 log-queries
@@ -167,13 +167,10 @@ conf-dir=/etc/storage/dnsmasq.d/conf/
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
-	echo
-	sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
-	rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
-else
-	echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m"
-	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_dnsmasq -qO /tmp/tmp_dnsmasq
-	chmod 777 /tmp/tmp_dnsmasq && sh /tmp/tmp_dnsmasq
+		echo
+		sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
+		rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
+	fi
 fi
 
 if [ -f "/etc/storage/post_iptables_script.sh" ]; then
