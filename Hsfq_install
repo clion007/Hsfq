@@ -49,7 +49,13 @@ if [ "$Function_options" == "3" ]; then
 		sed -i '/strict-order/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf	
 		sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
-		cp -f /etc/storage/dnsmasq.d/resolv /etc/resolv.conf
+		if [ ! -f "/etc/storage/dnsmasq.d/resolv" ]; then
+			sed -i '/127.0.0.1/d' /etc/resolv.conf
+			sed -i '/176.103.130.131/d' /etc/resolv.conf
+			sed -i '/4.2.2.2/d' /etc/resolv.conf
+		else
+			cp -f /etc/storage/dnsmasq.d/resolv /etc/resolv.conf
+		fi
 	fi
 
 	if [ -d "/etc/storage/dnsmasq.d/hosts" ]; then
