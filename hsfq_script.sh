@@ -1,14 +1,13 @@
 #!/bin/sh
-# Compile:by-lanse	2017-08-27
+# Compile:by-lanse	2017-08-28
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
-echo
+
 echo -e -n "\033[41;37m 开始构建翻墙平台......\033[0m"
-echo
 sleep 3
 if [ ! -d "/etc/storage/dnsmasq.d" ]; then
-	echo -e "\e[1;36m 创建 dnsmasq 规则脚本文件夹 \e[0m"
 	mkdir -p -m 755 /etc/storage/dnsmasq.d
+	echo -e "\e[1;36m 创建 dnsmasq 规则脚本文件夹 \e[0m"
 	cp -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
 fi
 
@@ -167,7 +166,6 @@ conf-dir=/etc/storage/dnsmasq.d/conf
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
-		echo
 		sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
 		rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
 	fi
@@ -188,13 +186,11 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 	sed -i '$a sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh
 fi
-echo
+rm -rf /tmp/hsfq_script.sh
+sh /tmp/hsfq_install
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "+                 installation is complete                 +"
 echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 sleep 3
-rm -rf /tmp/hsfq_script.sh
-sh /tmp/hsfq_install
-echo
