@@ -5,7 +5,8 @@ route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " 
 username=`nvram get http_username`
 echo
 echo -e "\e[1;36m FQ 翻墙规则开始下载... \e[0m"
-
+[ -f /tmp/fq ] && rm -rf /tmp/fq
+echo
 # 下载 FQ 组合规则
 wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq -qO \
 /tmp/fq.conf && sleep 2 && chmod +x /tmp/fq.conf && . /tmp/fq.conf
@@ -76,6 +77,5 @@ fi
 # 删除临时合并缓存
 rm -rf /tmp/hosts_fq
 rm -rf /tmp/hosts_fq.txt
-rm -rf /tmp/tmp_fq3
 rm -rf /tmp/tmp_fq_up
 echo
