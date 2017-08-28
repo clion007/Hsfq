@@ -27,11 +27,11 @@ echo -e "\e[1;36m 导入自定义规则 \e[0m"
 echo -e "\n"
 cp /etc/storage/dnsmasq.d/blacklist /tmp/blacklist
 sed -i "/#/d" /tmp/blacklist
-# sed -i 's/^/127.0.0.1 &/g' /tmp/blacklist
+sed -i 's/^/127.0.0.1 &/g' /tmp/blacklist
 
 # 合并 hosts 缓存
 #cat /tmp/blacklist /tmp/ad > /tmp/hosts_ad
-cat /tmp/blacklist /tmp/Ad0.conf /tmp/ad /tmp/abd > /tmp/hosts_ad && chmod 644 /tmp/hosts_ad
+cat /tmp/blacklist /tmp/Ad0.conf /tmp/ad /tmp/abd > /tmp/hosts_ad
 
 # 删除 hosts 缓存
 rm -rf /tmp/blacklist
@@ -66,7 +66,8 @@ echo "## 自定义 hosts 设置	【2017 by.lanse】
 sort -n /tmp/hosts_ad | uniq | sed -E -e "/^$/d" -e "s/[[:space:]][[:space:]]*/ /g" >> /tmp/hosts_ad.conf
 
 # 修饰结束
-sed -i '$a # 修饰 hosts 结束' /tmp/hosts_ad.conf;sleep 3
+sleep 2
+sed -i '$a # 修饰 hosts 结束' /tmp/hosts_ad.conf
 
 echo -e "\033[41;33m 更新 hosts_ad 规则\033[0m"
 echo -e "\n"
