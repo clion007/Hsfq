@@ -43,7 +43,8 @@ sort -n /tmp/hosts_fq |uniq >> /tmp/hosts_fq.conf
 
 # 修饰结束
 sleep 2
-sed -i '$a # Modified DNS end' /tmp/hosts_fq.conf
+sed -i '$a # Modified DNS' /tmp/hosts_fq.conf
+sed -i '$a # -END-' /tmp/hosts_fq.conf
 
 echo -e "\033[41;33m 更新 hosts_fq 规则\033[0m"
 echo -e "\n"
