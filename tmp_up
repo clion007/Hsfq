@@ -1,8 +1,8 @@
 #!/bin/sh
-# Compile:by-lanse  2017-08-24
+# Compile:by-lanse  2017-08-28
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 echo
-echo " 检测脚本版本."
+echo " 检测安装脚本版本."
 if [ ! -f /tmp/hsfq_script_up.sh ]; then
 	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/hsfq_script.sh -O /tmp/hsfq_script_up.sh;chmod 775 /tmp/hsfq_script_up.sh
 	echo
@@ -13,7 +13,7 @@ if [ ! -f /tmp/hsfq_script_up.sh ]; then
 		rm -f /etc/storage/dnsmasq.d/hsfq_script.sh
 		cp -f /tmp/hsfq_script_up.sh /etc/storage/dnsmasq.d/hsfq_script.sh
 		mv -f /tmp/hsfq_script_up.sh /tmp/hsfq_script.sh && rm -f hsfq_script_up.txt
-		echo -e "\033[41;37m新脚本更新完成.开始安装程序\033[0m"
+		echo -e "\033[41;37m安装脚本更新完成.开始运行\033[0m"
 		echo
 		sleep 5
 		echo
@@ -38,4 +38,3 @@ if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
 	sleep 3
 fi	
 echo
-
