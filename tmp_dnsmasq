@@ -1,7 +1,7 @@
 #!/bin/sh
 # Compile:by-lanse    2018-08-28
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
-echo
+
 ## 配置dnsmasq.conf启动规则
 grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
 if [ $? -eq 0 ]; then
@@ -14,7 +14,7 @@ if [ $? -eq 0 ]; then
 else
 	echo -e "\033[41;37m 开始写入启动代码 \e[0m"
 fi
-echo
+
 echo "listen-address=${route_vlan},127.0.0.1
 # 添加监听地址
 # 开启日志选项
@@ -29,7 +29,7 @@ conf-dir=/etc/storage/dnsmasq.d/conf
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
-echo
+
 sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
 sleep 2
 rm /tmp/tmp_dnsmasq rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
