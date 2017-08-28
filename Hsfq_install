@@ -23,7 +23,7 @@ echo -e "\e[1;31m >	6. 卸载 \e[1;36mpadavan 纯净去广告\e[0m"
 echo
 echo -e "\e[1;31m >	7. \033[41;37m退出\e[0m"
 echo
-echo -e -n "\e[44;37m 请输入数字继续执行: \e[0m\n" 
+echo -e -n "\e[44;37m 请输入数字继续执行: \e[0m" 
 read Function_options
 if [ "$Function_options" == "1" ]; then
 	echo
