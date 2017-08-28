@@ -202,7 +202,6 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 fi
 rm -rf /tmp/hsfq_script.sh
 sh /tmp/hsfq_install
-echo -e "\n"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "+                 installation is complete                 +"
 echo "+                                                          +"
