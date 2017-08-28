@@ -14,11 +14,11 @@ for URL in \
 	"https://raw.githubusercontent.com/vokins/yhosts/master/dnsmasq/ip.conf"
 do
 	wget --no-check-certificate -t 15 -T 50 -O- "${URL}" \
-	|sed -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/★/d" -e "/^#/d" -e "/^$/d" >> ${TMP_FQ2} 
+	|sed -E -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/★/d" -e "/^#/d" -e "/^$/d" >> ${TMP_FQ2} 
 done
 
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wangchunming/2017hosts/master/hosts-pc \
-| sed -e "/#/d" -e "/localhos/d" -e "/hostname/d" \
+| sed -E -e "/#/d" -e "/localhos/d" -e "/hostname/d" \
 | awk '{print "address=/"$2"/"$1"\t"$3,""}' \
 | sed -e "/address=\/\//d" >> ${TMP_FQ3}
 #wget --no-check-certificate -t 20 -T 60 -O- http://idannywu.com/dannywugooglehosts/noadhosts.txt \
