@@ -163,7 +163,7 @@ log-async=50
 # 缓存最长时间
 min-cache-ttl=1800
 # 指定服务器'域名''地址'文件夹
-conf-dir=/etc/storage/dnsmasq.d/conf/
+conf-dir=/etc/storage/dnsmasq.d/conf
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
