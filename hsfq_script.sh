@@ -11,6 +11,7 @@ if [ ! -d "/etc/storage/dnsmasq.d" ]; then
 	echo -e "\e[1;36m 创建 dnsmasq 规则脚本文件夹 \e[0m"
 	echo -e "\n"
 	cp -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
+	cp -f /etc/resolv.conf /etc/storage/dnsmasq.d/resolv
 fi
 
 if [ ! -f "/etc/storage/dnsmasq.d/userlist" ]; then
