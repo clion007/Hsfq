@@ -44,9 +44,8 @@ nameserver 127.0.0.1
 ## 根据网络环境选择DNS.最多6个地址按速排序
 nameserver 223.6.6.6
 nameserver 8.8.4.4
-nameserver 114.114.114.119
+nameserver 114.114.114.114
 nameserver 176.103.130.131
-nameserver 119.29.29.29
 nameserver 4.2.2.2
 EOF
 else
@@ -207,4 +206,4 @@ echo "+                 installation is complete                 +"
 echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo -e "\n" && sleep 3
+echo -e "\n" && sleep 3  >/dev/null 2>&1
