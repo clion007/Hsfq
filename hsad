@@ -6,7 +6,7 @@ TMP_AD=/tmp/tmp_ad
 TMP_AD2=/tmp/tmp_ad2
 AD=/tmp/ad
 
-[ -f ${AD} ] && rm -rf ${AD};[ -f ${TMP_AD2} ] && rm -rf ${TMP_AD2};[ -f ${TMP_AD4} ] && rm -rf ${TMP_AD4}
+[ -f ${AD} ] && rm -rf ${AD};[ -f ${TMP_AD2} ] && rm -rf ${TMP_AD2}
 for URL in \
 	"http://winhelp2002.mvps.org/hosts.txt" \
 	"http://c.nnjsx.cn/GL/dnsmasq/update/adblock/yhosts.txt"
