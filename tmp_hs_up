@@ -4,7 +4,7 @@ LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 echo
 echo -e "\e[1;36m HOSTS 去广告规则开始下载... \e[0m"
-
+[ -f /tmp/ad ] && rm -rf /tmp/ad;[ -f /tmp/abd ] && rm -rf /tmp/abd
 # 下载 HOSTS 组合规则
 echo
 echo -e "\e[1;36m 下载 adblock 规则 \e[0m"
@@ -98,6 +98,5 @@ fi
 # 删除临时文件
 rm -rf /tmp/hosts_ad
 rm -rf /tmp/hosts_ad.txt
-rm -rf /tmp/tmp_ad3
 rm -rf /tmp/tmp_hs_up
 echo
