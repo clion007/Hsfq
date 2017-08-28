@@ -178,7 +178,7 @@ conf-dir=/etc/storage/dnsmasq.d/conf
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
-		sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
+		sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf && sleep 3
 		rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
 	fi
 fi
@@ -197,7 +197,7 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 	sed -i '/restart_dhcpd/d' /etc/storage/post_iptables_script.sh
 	sed -i '$a cp -f /etc/storage/dnsmasq.d/resolv.conf /tmp/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf' /etc/storage/post_iptables_script.sh
-	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh
+	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh && sleep 3
 fi
 rm -rf /tmp/hsfq_script.sh
 sh /tmp/hsfq_install
