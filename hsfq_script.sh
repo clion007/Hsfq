@@ -208,4 +208,5 @@ echo "+                 installation is complete                 +"
 echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo -e "\n"
 sleep 3
