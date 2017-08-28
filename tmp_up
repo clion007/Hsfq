@@ -35,3 +35,4 @@ if [ -x "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
 	restart_dhcpd && /usr/sbin/dnsmasq restart 2>&1 >/dev/null
 	sleep 3
 fi
+sleep 2 >/dev/null 2>&1
