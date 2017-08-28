@@ -3,20 +3,17 @@
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
 
-echo -e -n "\033[41;37m 开始构建翻墙平台......\033[0m"
-echo -e "\n"
+echo -e -n "\033[41;37m 开始构建翻墙平台......\033[0m\n"
 sleep 3
 if [ ! -d "/etc/storage/dnsmasq.d" ]; then
 	mkdir -p -m 755 /etc/storage/dnsmasq.d
-	echo -e "\e[1;36m 创建 dnsmasq 规则脚本文件夹 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;36m 创建 dnsmasq 规则脚本文件夹 \e[0m\n"
 	cp -f /tmp/hsfq_script.sh /etc/storage/dnsmasq.d/hsfq_script.sh
 	cp -f /etc/resolv.conf /etc/storage/dnsmasq.d/resolv
 fi
 
 if [ ! -f "/etc/storage/dnsmasq.d/userlist" ]; then
-	echo -e "\e[1;36m 创建自定义翻墙规则 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;36m 创建自定义翻墙规则 \e[0m\n"
 	cat > "/etc/storage/dnsmasq.d/userlist" <<EOF
 # 国内dns优化
 address=/.taobao./223.6.6.6
@@ -29,15 +26,13 @@ fi
 chmod 644 /etc/storage/dnsmasq.d/userlist
 
 if [ -d "/etc/storage/dnsmasq.d" ]; then
-	echo -e "\e[1;33m 创建更新脚本 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;33m 创建更新脚本 \e[0m\n"
 	wget --no-check-certificate -t 30 -T 60 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_up -qO /tmp/tmp_hsfq_update.sh
 	mv -f /tmp/tmp_hsfq_update.sh /etc/storage/dnsmasq.d/hsfq_update.sh && sleep 3
 	chmod 755 /etc/storage/dnsmasq.d/hsfq_update.sh
 fi
 
-echo -e "\e[1;36m 创建 DNS 配置文件 \e[0m"
-echo -e "\n"
+echo -e "\e[1;36m 创建 DNS 配置文件 \e[0m\n"
 if [ ! -f "/etc/storage/dnsmasq.d/resolv.conf" ]; then
 	cat > /etc/storage/dnsmasq.d/resolv.conf <<EOF
 ## DNS解析服务器设置
@@ -58,21 +53,18 @@ cp -f /etc/storage/dnsmasq.d/resolv.conf /tmp/resolv.conf
 sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf
 
 if [ ! -d "/etc/storage/dnsmasq.d/conf" ]; then
-	echo -e "\e[1;36m 创建 'FQ' 文件 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;36m 创建 'FQ' 文件 \e[0m\n"
 	mkdir -p /etc/storage/dnsmasq.d/conf
 	echo "address=/localhost/127.0.0.1" > /etc/storage/dnsmasq.d/conf/hosts_fq.conf && chmod 644 /etc/storage/dnsmasq.d/conf/hosts_fq.conf
 fi
 
 if [ ! -d "/etc/storage/dnsmasq.d/hosts" ]; then
-	echo -e "\e[1;36m 创建 'HOSTS' 文件 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;36m 创建 'HOSTS' 文件 \e[0m\n"
 	mkdir -p /etc/storage/dnsmasq.d/hosts
 	echo "127.0.0.1 localhost" > /etc/storage/dnsmasq.d/hosts/hosts_ad.conf && chmod 644 /etc/storage/dnsmasq.d/hosts/hosts_ad.conf
 fi
 
-echo -e "\e[1;36m 创建自定义广告黑名单 \e[0m"
-echo -e "\n"
+echo -e "\e[1;36m 创建自定义广告黑名单 \e[0m\n"
 if [ ! -f "/etc/storage/dnsmasq.d/blacklist" ]; then
 	cat > "/etc/storage/dnsmasq.d/blacklist" <<EOF
 # 请在下面添加广告黑名单
@@ -121,8 +113,7 @@ else
 fi
 chmod 644 /etc/storage/dnsmasq.d/blacklist
 
-echo -e "\e[1;36m 创建自定义广告白名单 \e[0m"
-echo -e "\n"
+echo -e "\e[1;36m 创建自定义广告白名单 \e[0m\n"
 if [ ! -f "/etc/storage/dnsmasq.d/whitelist" ]; then
 	cat > "/etc/storage/dnsmasq.d/whitelist" <<EOF
 # 请将误杀的网址添加到在下面白名单
@@ -155,21 +146,18 @@ fi
 chmod 644 /etc/storage/dnsmasq.d/whitelist
 
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
-	echo -e "\e[1;33m 添加定时计划更新任务 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;33m 添加定时计划更新任务 \e[0m\n"
 	sed -i '/hsfq_update.sh/d' /etc/storage/cron/crontabs/$username
 	sed -i '$a 45 05 * * 2,4,6 /bin/sh /etc/storage/dnsmasq.d/hsad_update.sh' /etc/storage/cron/crontabs/$username
 	sleep 2 && killall crond;/usr/sbin/crond
 fi
 
 if [ -f "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
-	echo -e -n "\033[41;37m 开始下载翻墙脚本文件......\033[0m"
-	echo -e "\n"
+	echo -e -n "\033[41;37m 开始下载翻墙脚本文件......\033[0m\n"
 	sh /etc/storage/dnsmasq.d/hsfq_update.sh
 fi
 
-echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m"
-echo -e "\n"
+echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m\n"
 [ -f /var/log/dnsmasq.log ] && rm /var/log/dnsmasq.log
 [ -f /tmp/tmp_dnsmasq ] && rm /tmp/tmp_dnsmasq
 if [ ! -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
@@ -183,8 +171,7 @@ else
 		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf	
 		sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
 	else
-		echo -e "\033[41;37m 开始写入启动代码 \e[0m"
-		echo -e "\n"
+		echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
 		echo "listen-address=${route_vlan},127.0.0.1
 # 添加监听地址
 # 开启日志选项
@@ -205,8 +192,7 @@ addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
 fi
 
 if [ -f "/etc/storage/post_iptables_script.sh" ]; then
-	echo -e "\e[1;36m 添加防火墙端口转发规则 \e[0m"
-	echo -e "\n"
+	echo -e "\e[1;36m 添加防火墙端口转发规则 \e[0m\n"
 	sed -i '/DNAT/d' /etc/storage/post_iptables_script.sh
 	sed -i '/iptables-save/d' /etc/storage/post_iptables_script.sh
 	sed -i '$a /bin/iptables-save' /etc/storage/post_iptables_script.sh
