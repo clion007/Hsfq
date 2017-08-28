@@ -5,9 +5,9 @@ echo -e "\e[1;36m 下载 Fq 翻网规则 \e[0m"
 TMP_FQ=/tmp/tmp_fq
 TMP_FQ2=/tmp/tmp_fq2
 TMP_FQ3=/tmp/tmp_fq3
-TMP_FQ4=/tmp/tmp_fq4
 FQ=/tmp/fq
-[ -f ${FQ} ] && rm -rf ${FQ};[ -f ${TMP_FQ2} ] && rm -rf ${TMP_FQ2};[ -f ${TMP_FQ4} ] && rm -rf ${TMP_FQ4}
+
+[ -f ${FQ} ] && rm -rf ${FQ};[ -f ${TMP_FQ2} ] && rm -rf ${TMP_FQ2};[ -f ${TMP_FQ3} ] && rm -rf ${TMP_FQ3}
 for URL in \
 	"https://raw.githubusercontent.com/sy618/hosts/master/dnsmasq/dnsfq" \
 	"https://raw.githubusercontent.com/vokins/yhosts/master/dnsmasq/ip.conf"
@@ -26,5 +26,5 @@ sleep 2
 cat ${TMP_FQ3} ${TMP_FQ2} > ${FQ} && sed -i "/address=\/\//d" ${FQ}
 #sort -n ${TMP_FQ} | uniq | sed -e "/# /d" -e "/\#a/d" -e "/\#s/d" -e "/#★/d" -e 1,2d >> ${FQ}
 echo -e "\033[45;37m 翻网规则下载完成 \033[0m"
-rm ${TMP_FQ2} ${TMP_FQ3} 2> /dev/null
+rm -rf ${TMP_FQ2} ${TMP_FQ3} 2> /dev/null
 #rm ${TMP_FQ} 2> /dev/null
