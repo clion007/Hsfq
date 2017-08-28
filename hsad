@@ -1,11 +1,10 @@
 #!/bin/sh
-# Compile:by-lanse    2018-08-20
+# Compile:by-lanse    2018-08-28
 echo
 echo -e "\e[1;36m 下载 'winhelp200''adblock' 屏蔽广告规则 \e[0m"
 TMP_AD=/tmp/tmp_ad
-AD=/tmp/ad
 TMP_AD2=/tmp/tmp_ad2
-
+AD=/tmp/ad
 
 [ -f ${AD} ] && rm -rf ${AD};[ -f ${TMP_AD2} ] && rm -rf ${TMP_AD2};[ -f ${TMP_AD4} ] && rm -rf ${TMP_AD4}
 for URL in \
@@ -23,4 +22,4 @@ cat ${TMP_AD} ${TMP_AD2} > ${AD}
 #sort -n ${TMP_AD} |uniq >> ${AD}
 sleep 2
 echo -e "\033[45;37m 'Hosts_Ad' 规则下载完成 \033[0m"
-rm ${TMP_AD} ${TMP_AD2} 2> /dev/null
+rm -rf ${TMP_AD} ${TMP_AD2} 2> /dev/null
