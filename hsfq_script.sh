@@ -197,13 +197,14 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 	sed -i '/restart_dhcpd/d' /etc/storage/post_iptables_script.sh
 	sed -i '$a cp -f /etc/storage/dnsmasq.d/resolv.conf /tmp/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf' /etc/storage/post_iptables_script.sh
-	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh && sleep 3
+	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh
 fi
-rm -rf /tmp/hsfq_script.sh
-sh /tmp/hsfq_install
+
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "+                 installation is complete                 +"
 echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo -e "\n" && sleep 3  >/dev/null 2>&1
+sleep 3
+rm -rf /tmp/hsfq_script.sh
+sh /tmp/hsfq_install >/dev/null 2>&1
