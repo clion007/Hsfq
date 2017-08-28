@@ -1,8 +1,7 @@
 #!/bin/sh
 # Compile:by-lanse    2018-08-28
 
-echo -e "\e[1;36m 下载 '网络收集' HOSTS 规则 \e[0m"
-echo -e "\n"
+echo -e "\e[1;36m 下载 '网络收集' HOSTS 规则 \e[0m\n"
 TMP_ABD=/tmp/tmp_abd
 TMP_ABD2=/tmp/tmp_abd2
 TMP_ABD3=/tmp/tmp_abd3
@@ -32,8 +31,7 @@ sleep 2
 cat ${TMP_ABD2} ${TMP_ABD3} ${TMP_ABD4} > ${ABD}
 #sort -n ${TMP_ABD} |uniq >> ${ABD}
 
-echo -e "\033[45;37m 分享 'hosts' 规则下载完成 \033[0m"
-echo -e "\n"
+echo -e "\033[45;37m 分享 'hosts' 规则下载完成 \033[0m\n"
 # 删除临时缓存
 rm -rf ${TMP_ABD2} ${TMP_ABD3} ${TMP_ABD4} 2> /dev/null
 #rm ${TMP_ABD} 2> /dev/null
