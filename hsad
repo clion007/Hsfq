@@ -14,7 +14,6 @@ for URL in \
 do
 	wget -t 15 -T 50 --no-check-certificate -O- "${URL}" \
 	| sed -E -e "s/#.*$//" -e "/^$/d" -e "/::/d" -e "/localhos/d" -e "s/0.0.0.0/127.0.0.1/" -e "s/[[:space:]][[:space:]]*/ /g" >> ${TMP_AD}
-	[ $? -eq 0 ] || sh /tmp/ad.conf
 done
 echo
 wget -t 15 -T 50 --no-check-certificate -O- https://raw.githubusercontent.com/vokins/yhosts/master/hosts \
