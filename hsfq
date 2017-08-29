@@ -24,7 +24,7 @@ wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wa
 #| sed -E -e "/#/d" -e "/^$/d" -e "/::/d" -e "/localhos/d" >> ${TMP_FQ4}
 
 sleep 2
-cat ${TMP_FQ3} ${TMP_FQ2} > ${FQ} && sleep 2;sed -i "s/address/server/" ${FQ}
+cat ${TMP_FQ3} ${TMP_FQ2} > ${FQ}
 #sort -n ${TMP_FQ} | uniq | sed -e "/# /d" -e "/\#a/d" -e "/\#s/d" -e "/#★/d" -e 1,2d >> ${FQ}
 
 echo -e "\033[45;37m 翻网规则下载完成 \033[0m\n"
