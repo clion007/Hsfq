@@ -8,15 +8,8 @@ TMP_FQ3=/etc/storage/dnsmasq.d/hosts/fq3.conf
 FQ=/tmp/fq
 
 [ -f ${FQ} ] && rm -rf ${FQ};[ -f ${TMP_FQ2} ] && rm -rf ${TMP_FQ2};[ -f ${TMP_FQ3} ] && rm -rf ${TMP_FQ3}
-for URL in \
-	"https://raw.githubusercontent.com/sy618/hosts/master/dnsmasq/dnsfq"
-do
-	wget --no-check-certificate -t 15 -T 50 -O- "${URL}" \
-	|sed -E -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/★/d" -e "/^#/d" -e "/^$/d" >> ${FQ} 
-done
-
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wangchunming/2017hosts/master/hosts-pc \
-| sed -E -e "/#/d" -e "/localhos/d" -e "/hostname/d" >> ${TMP_FQ3} && chmod 644 ${TMP_FQ3}
+| sed -E -e "/#/d" -e "/localhos/d" -e "/hostname/d" >> ${FQ}
 
 #wget --no-check-certificate -t 20 -T 60 -O- http://idannywu.com/dannywugooglehosts/noadhosts.txt \
 #| awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
