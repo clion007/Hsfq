@@ -218,6 +218,7 @@ sleep 3
 if [ -f "/tmp/hsfq_install" ]; then
 	sh /tmp/hsfq_install
 else
+	echo -e "\e[1;33m 脚本运行结束并退出 \e[0m\n"
 	exit 0
 fi
 rm -rf /tmp/hsfq_script.sh >/dev/null 2>&1
