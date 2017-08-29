@@ -218,7 +218,7 @@ sleep 3
 rm -rf /tmp/hsfq_script.sh
 if [ ! -f "/tmp/hsfq_install" ]; then
 	echo -e "\e[1;33m 脚本运行结束并退出 \e[0m\n"
-	exit 0
+	sleep 3 && exit 0
 else
 	sh /tmp/hsfq_install
 fi
