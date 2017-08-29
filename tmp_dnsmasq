@@ -10,8 +10,7 @@ if [ $? -eq 0 ]; then
 	sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf
 	sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
 else
-	echo -e "\033[41;37m 开始写入启动代码 \e[0m"
-	echo -e "\n"
+	echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
 fi
 
 echo "listen-address=${route_vlan},127.0.0.1
@@ -29,7 +28,7 @@ conf-dir=/etc/storage/dnsmasq.d/conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
 
-#cat /tmp/tmp_dnsmasq.conf | sed -E -e "/#/d" >> /etc/storage/dnsmasq/dnsmasq.conf;sleep 3
-sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
+cat /tmp/tmp_dnsmasq.conf | sed -E -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf;sleep 3
+#sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf
 sleep 2
 rm /tmp/tmp_dnsmasq rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
