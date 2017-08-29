@@ -65,7 +65,7 @@ if [ "$Function_options" == "3" ]; then
 
 	if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 		echo -e "\e[1;31m 删除更新计划任务 \e[0m\n" && sleep 2
-		sed -i '/fqhs/d' /etc/storage/cron/crontabs/$username
+		sed -i '/hsfq_update.sh/d' /etc/storage/cron/crontabs/$username
 		killall crond;/usr/sbin/crond
 	fi
 
