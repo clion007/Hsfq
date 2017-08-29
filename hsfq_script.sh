@@ -183,7 +183,7 @@ conf-dir=/etc/storage/dnsmasq.d/conf
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
 # 指定hosts解析'地址''域名'文件夹
 addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
-		cat /tmp/tmp_dnsmasq.conf | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf && sleep 3
+		sort -n /tmp/tmp_dnsmasq.conf | uniq | sed -e "/# /d" >> /etc/storage/dnsmasq/dnsmasq.conf && sleep 3
 		rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
 	fi
 fi
@@ -215,5 +215,9 @@ echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 sleep 3
-sh /tmp/hsfq_install
+if [ -f "/tmp/hsfq_install" ]; then
+	sh /tmp/hsfq_install
+else
+	exit 0
+fi
 rm -rf /tmp/hsfq_script.sh >/dev/null 2>&1
