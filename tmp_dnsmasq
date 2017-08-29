@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse    2018-08-28
+# Compile:by-lanse    2018-08-29
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 
 ## 配置dnsmasq.conf启动规则
@@ -7,7 +7,7 @@ grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
 if [ $? -eq 0 ]; then
 	sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 	sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
-	sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf	
+	sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf
 	sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
 else
 	echo -e "\033[41;37m 开始写入启动代码 \e[0m"
