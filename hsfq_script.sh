@@ -216,4 +216,5 @@ echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 sleep 3
 rm -rf /tmp/hsfq_script.sh
-[ -f "/tmp/hsfq_install" ] && sh /tmp/hsfq_install
+[ ! -f "/tmp/hsfq_install" ] && exit()
+sh /tmp/hsfq_install
