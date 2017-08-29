@@ -18,7 +18,7 @@ done
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/wangchunming/2017hosts/master/hosts-pc \
 | sed -E -e "/#/d" -e "/localhos/d" -e "/hostname/d" \
 | awk '{print "address=/"$2"/"$1"\t"$3,""}' \
-| sed -e "/address=\/\//d" >> ${TMP_FQ3}
+| sed -e "/address=\/\//d" -e 's/[[:space:]][[:space:]]*/ /g' -e 's/.$//' >> ${TMP_FQ3}
 #wget --no-check-certificate -t 20 -T 60 -O- http://idannywu.com/dannywugooglehosts/noadhosts.txt \
 #| awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
 #| sed -E -e "/#/d" -e "/^$/d" -e "/::/d" -e "/localhos/d" >> ${TMP_FQ4}
