@@ -149,7 +149,6 @@ chmod 644 /etc/storage/dnsmasq.d/whitelist
 
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 	echo -e "\e[1;33m 添加定时计划更新任务 \e[0m\n"
-	username=`nvram get http_username`
 	sed -i '/hsfq_update.sh/d' /etc/storage/cron/crontabs/$username
 	sed -i '$a 45 05 * * 2,4,6 sh /etc/storage/dnsmasq.d/hsfq_update.sh' /etc/storage/cron/crontabs/$username
 	sleep 2 && killall crond;/usr/sbin/crond
@@ -217,9 +216,4 @@ echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 sleep 3
 rm -rf /tmp/hsfq_script.sh
-if [ -f "/tmp/hsfq_install" ]; then
-	echo -e "\e[1;33m 脚本运行结束并退出 \e[0m\n" && sleep 3
-	exit 0
-else
-	sh /tmp/hsfq_install
-fi
+[ -f "/tmp/hsfq_install" ] && sh /tmp/hsfq_install
