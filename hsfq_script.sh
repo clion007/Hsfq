@@ -107,10 +107,11 @@ lives.l.aiseet.atianqi.com
 23.235.156.167
 101.201.29.182
 EOF
-else
-	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Blacklist -qO /tmp/tmp_blacklist
-	mv -f /tmp/tmp_blacklist /etc/storage/dnsmasq.d/blacklist && sleep 3
 fi
+# else
+	# wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Blacklist -qO /tmp/tmp_blacklist
+	# mv -f /tmp/tmp_blacklist /etc/storage/dnsmasq.d/blacklist && sleep 3
+# fi
 chmod 644 /etc/storage/dnsmasq.d/blacklist
 
 echo -e "\e[1;36m 创建自定义广告白名单 \e[0m\n"
@@ -141,10 +142,11 @@ zhushou.360.cn
 shouji.360.cn
 hot.m.shouji.360tpcdn.com
 EOF
-else
-	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Whitelist -qO /tmp/tmp_whitelist
-	mv -f /tmp/tmp_whitelist /etc/storage/dnsmasq.d/whitelist && sleep 3
 fi
+# else
+	# wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Whitelist -qO /tmp/tmp_whitelist
+	# mv -f /tmp/tmp_whitelist /etc/storage/dnsmasq.d/whitelist && sleep 3
+# fi
 chmod 644 /etc/storage/dnsmasq.d/whitelist
 
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
