@@ -154,11 +154,6 @@ if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 	sleep 2 && killall crond;/usr/sbin/crond
 fi
 
-if [ -f "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
-	echo -e -n "\033[41;37m 开始下载翻墙脚本文件......\033[0m\n"
-	sh /etc/storage/dnsmasq.d/hsfq_update.sh
-fi
-
 echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m\n"
 [ -f /var/log/dnsmasq.log ] && rm /var/log/dnsmasq.log
 [ -f /tmp/tmp_dnsmasq ] && rm /tmp/tmp_dnsmasq
@@ -207,6 +202,11 @@ if [ -f "/etc/storage/post_iptables_script.sh" ]; then
 	sed -i '$a cp -f /etc/storage/dnsmasq.d/resolv.conf /tmp/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a sed -i "/#/d" /tmp/resolv.conf;mv -f /tmp/resolv.conf /etc/resolv.conf' /etc/storage/post_iptables_script.sh
 	sed -i '$a restart_dhcpd' /etc/storage/post_iptables_script.sh
+fi
+
+if [ -f "/etc/storage/dnsmasq.d/hsfq_update.sh" ]; then
+	echo -e -n "\033[41;37m 开始下载翻墙脚本文件......\033[0m\n"
+	sh /etc/storage/dnsmasq.d/hsfq_update.sh
 fi
 
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
