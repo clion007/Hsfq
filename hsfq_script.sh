@@ -215,10 +215,10 @@ echo "+                                                          +"
 echo "+                     Time:`date +'%Y-%m-%d'`                      +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 sleep 3
-if [ -f "/tmp/hsfq_install" ]; then
-	sh /tmp/hsfq_install
-else
+rm -rf /tmp/hsfq_script.sh
+if [ ! -f "/tmp/hsfq_install" ]; then
 	echo -e "\e[1;33m 脚本运行结束并退出 \e[0m\n"
 	exit 0
+else
+	sh /tmp/hsfq_install
 fi
-rm -rf /tmp/hsfq_script.sh >/dev/null 2>&1
