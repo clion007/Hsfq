@@ -159,13 +159,13 @@ echo -e "\e[1;36m 添加自定义 hosts 启动路径 \e[0m\n"
 [ -f /tmp/tmp_dnsmasq ] && rm /tmp/tmp_dnsmasq
 if [ ! -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_dnsmasq -qO /tmp/tmp_dnsmasq
-	chmod 777 /tmp/tmp_dnsmasq && sh /tmp/tmp_dnsmas	
+	chmod 777 /tmp/tmp_dnsmasq && sh /tmp/tmp_dnsmasq
 else
 	grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf	
+		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
 	else
 		echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
