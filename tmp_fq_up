@@ -77,4 +77,3 @@ fi
 rm -rf /tmp/hosts_fq
 rm -rf /tmp/hosts_fq.txt
 rm -rf /tmp/tmp_fq_up
-rm -rf /tmp/tmp_fq
