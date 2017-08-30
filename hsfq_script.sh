@@ -16,8 +16,8 @@ if [ ! -f "/etc/storage/dnsmasq.d/userlist" ]; then
 	echo -e "\e[1;36m 创建自定义翻墙规则 \e[0m\n"
 	cat > "/etc/storage/dnsmasq.d/userlist" <<EOF
 # 国内dns优化
-address=/.taobao./223.6.6.6
-address=/.alicdn./223.6.6.6
+address=/email.163.com/223.6.6.6
+address=/mail.qq.com/119.29.29.29
 EOF
 # else
 #	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Userlist -qO /tmp/tmp_userlist
@@ -39,10 +39,10 @@ if [ ! -f "/etc/storage/dnsmasq.d/resolv.conf" ]; then
 nameserver 127.0.0.1
 ## 根据网络环境选择DNS.最多6个地址按速排序
 nameserver 223.6.6.6
-nameserver 8.8.4.4
-nameserver 114.114.114.114
 nameserver 176.103.130.131
-nameserver 4.2.2.2
+nameserver 114.114.114.114
+nameserver 119.29.29.29
+nameserver 8.8.4.4
 EOF
 # else
 #	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/resolv.conf -qO /tmp/tmp_resolv.conf
