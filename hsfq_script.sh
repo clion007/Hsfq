@@ -19,9 +19,6 @@ if [ ! -f "/etc/storage/dnsmasq.d/userlist" ]; then
 address=/email.163.com/223.6.6.6
 address=/mail.qq.com/119.29.29.29
 EOF
-# else
-#	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Userlist -qO /tmp/tmp_userlist
-#	mv -f /tmp/tmp_userlist /etc/storage/dnsmasq.d/userlist && sleep 3
 fi
 chmod 644 /etc/storage/dnsmasq.d/userlist
 
@@ -44,9 +41,6 @@ nameserver 114.114.114.114
 nameserver 119.29.29.29
 nameserver 8.8.4.4
 EOF
-# else
-#	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/resolv.conf -qO /tmp/tmp_resolv.conf
-#	mv -f /tmp/tmp_resolv.conf /etc/storage/dnsmasq.d/resolv.conf && sleep 3
 fi
 chmod 644 /etc/storage/dnsmasq.d/resolv.conf && chmod 644 /etc/resolv.conf
 cp -f /etc/storage/dnsmasq.d/resolv.conf /tmp/resolv.conf
@@ -107,9 +101,6 @@ lives.l.aiseet.atianqi.com
 23.235.156.167
 101.201.29.182
 EOF
-# else
-#	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Blacklist -qO /tmp/tmp_blacklist
-#	mv -f /tmp/tmp_blacklist /etc/storage/dnsmasq.d/blacklist && sleep 3
 fi
 chmod 644 /etc/storage/dnsmasq.d/blacklist
 
@@ -141,9 +132,6 @@ zhushou.360.cn
 shouji.360.cn
 hot.m.shouji.360tpcdn.com
 EOF
-# else
-#	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/Whitelist -qO /tmp/tmp_whitelist
-#	mv -f /tmp/tmp_whitelist /etc/storage/dnsmasq.d/whitelist && sleep 3
 fi
 chmod 644 /etc/storage/dnsmasq.d/whitelist
 
