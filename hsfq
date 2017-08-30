@@ -19,11 +19,10 @@ done
 wget --no-check-certificate -t 15 -T 50 -O- "https://raw.githubusercontent.com/sy618/hosts/master/dnsmasq/dnsfq" \
 |sed -E -e "/# /d" -e "/\#a/d" -e "/^$/d" -e "/★/d" -e "/^#/d" -e "/^$/d" >> ${TMP_FQ2}
 
-wget --no-check-certificate -t 15 -T 50 -O- https://raw.githubusercontent.com/896660689/Hsfq/master/hs_pc \
+wget --no-check-certificate -t 15 -T 50 -O- https://raw.githubusercontent.com/896660689/Hsfq/master/hs_pc2 \
 | sed -E -e "/#/d" >> ${TMP_FQ3}
 
-sed -i "/youtube/d" ${TMP_FQ2}
-sed -i "/tumblr/d" ${TMP_FQ2}
+sed -i "/youtube/d; /google/d; /tumblr/d" ${TMP_FQ2}
 
 #wget --no-check-certificate -t 20 -T 60 -O- http://idannywu.com/dannywugooglehosts/noadhosts.txt \
 #| awk '{if(/^#/||/^$/) {print $0} else {print "address=/"$2"/"$1"\t"$3,"\n""address=/"$2"/#"}}' \
