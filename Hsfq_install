@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse	2017-08-28
+# Compile:by-lanse	2017-08-30
 
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
@@ -50,7 +50,7 @@ if [ "$Function_options" == "3" ]; then
 		sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
 		if [ ! -f "/etc/storage/dnsmasq.d/resolv" ]; then
 			sed -i '/176.103.130.131/d' /etc/resolv.conf
-			sed -i '/4.2.2.2/d' /etc/resolv.conf
+			sed -i '/119.29.29.29/d' /etc/resolv.conf
 		else
 			cp -f /etc/storage/dnsmasq.d/resolv /etc/resolv.conf
 		fi
@@ -92,7 +92,7 @@ if [ "$Function_options" == "4" ]; then
 	[ -f /tmp/hsfq_script.sh ] && rm -rf /tmp/hsfq_script.sh
 	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/ss_ad.sh -O \
 	/tmp/hsfq_ssad.sh && chmod +x /tmp/hsfq_ssad.sh && . /tmp/hsfq_ssad.sh
-	echo -e "\n" && sh /tmp/hsfq_install
+	sh /tmp/hsfq_install
 fi
 
 if [ "$Function_options" == "5" ]; then
@@ -120,8 +120,7 @@ if [ "$Function_options" == "6" ]; then
 	fi
 
 	if [ -f "/usr/sbin/dnsmasq" ]; then
-		echo -e "\e[1;31m 重启 dnsmasq \e[0m"
-		echo -e "\n"
+		echo -e "\e[1;31m 重启 dnsmasq \e[0m\n"
 		restart_dhcpd && /usr/sbin/dnsmasq restart >/dev/null 2>&1
 	fi
 
