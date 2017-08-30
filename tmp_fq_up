@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse    2017-08-28
+# Compile:by-lanse    2017-08-30
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
@@ -28,13 +28,10 @@ cat > /tmp/hosts_fq.conf <<EOF
 ## 域名自定义 dnsmasq 设置	【2017 by.lanse】
 # Localhost (DO NOT REMOVE) Start
 address=/localhost/127.0.0.1
-# address=/localhost/::1
+address=/localhost/::1
 address=/ip6-localhost/::1
-# address=/ip6-loopback/::1
+address=/ip6-loopback/::1
 # Localhost (DO NOT REMOVE) End
-
-# 以下示例.去“#”生效
-#address=/mit.ru/izmuroma.ru/10.25.11.30
 EOF
 
 # 去重排序规则
