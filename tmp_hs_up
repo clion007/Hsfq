@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse    2018-08-28
+# Compile:by-lanse    2018-08-30
 LOGTIME=$(date "+%m-%d %H:%M:%S")
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 
@@ -51,9 +51,9 @@ sed -i '/::1/d' /tmp/hosts_ad
 echo "## 自定义 hosts 设置	【2017 by.lanse】
 # Localhost (DO NOT REMOVE) Start
 127.0.0.1 localhost
-# ::1	localhost
+::1	localhost
 ::1	ip6-localhost
-# ::1	ip6-loopback
+::1	ip6-loopback
 # Localhost (DO NOT REMOVE) End
 # Example: hosts 设置例子:
 # 192.168.2.80		Boo" > /tmp/hosts_ad.conf
