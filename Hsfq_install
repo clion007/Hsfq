@@ -75,10 +75,8 @@ if [ "$Function_options" == "3" ]; then
 
 	if [ -f "/usr/sbin/dnsmasq" ]; then
 		echo -e "\e[1;31m 重启 dnsmasq \e[0m\n"
-		[ -f /tmp/fqhs_an.sh ] && rm -f /tmp/fqhs_an.sh
 		restart_dhcpd && /usr/sbin/dnsmasq restart >/dev/null 2>&1
 	fi
-
 	echo -e "\e[1;34m-- Hsfq 卸载完毕,返回主菜单--\e[0m\n" && sleep 3
 	sh /tmp/hsfq_install
 fi
