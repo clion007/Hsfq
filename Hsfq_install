@@ -56,8 +56,6 @@ if [ "$Function_options" == "3" ]; then
 
 	if [ -d "/etc/storage/dnsmasq.d/hosts" ]; then
 		echo -e "\e[1;31m 删除残留文件夹以及配置 \e[0m\n" && sleep 2
-		[ -f "/tmp/tmp_ad3" ] && rm -f /tmp/tmp_ad3
-		[ -f "/tmp/tmp_fq3" ] && rm -f /tmp/tmp_fq3
 		rm -rf /etc/storage/dnsmasq.d
 	fi
 
