@@ -149,15 +149,15 @@ if [ ! -f "/etc/storage/dnsmasq/dnsmasq.conf" ]; then
 	wget --no-check-certificate -t 20 -T 50 https://raw.githubusercontent.com/896660689/Hsfq/master/tmp_dnsmasq -qO /tmp/tmp_dnsmasq
 	chmod 777 /tmp/tmp_dnsmasq && sh /tmp/tmp_dnsmasq
 else
-	grep "storage" /etc/storage/dnsmasq/dnsmasq.conf
+	grep "conf-dir" /etc/storage/dnsmasq/dnsmasq.conf
 	if [ $? -eq 0 ]; then
 		sed -i '/127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/log/d' /etc/storage/dnsmasq/dnsmasq.conf
 		sed -i '/1800/d' /etc/storage/dnsmasq/dnsmasq.conf
-		sed -i '/dnsmasq.d/d' /etc/storage/dnsmasq/dnsmasq.conf
-	else
-		echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
-		echo "listen-address=${route_vlan},127.0.0.1
+		sed -i '/conf-dir/d' /etc/storage/dnsmasq/dnsmasq.conf
+	fi
+	echo -e "\033[41;37m 开始写入启动代码 \e[0m\n"
+	echo "listen-address=${route_vlan},127.0.0.1
 # 添加监听地址
 # 开启日志选项
 log-queries
@@ -165,15 +165,12 @@ log-facility=/var/log/dnsmasq.log
 # 异步log,缓解阻塞，提高性能。默认为5，最大为100
 log-async=50
 # 缓存最长时间
-min-cache-ttl=1800
+#min-cache-ttl=1800
 # 指定服务器'域名''地址'文件夹
 conf-dir=/etc/storage/dnsmasq.d/conf
-# conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf
-# 指定hosts解析'地址''域名'文件夹
-addn-hosts=/etc/storage/dnsmasq.d/hosts" >> /tmp/tmp_dnsmasq.conf
-		cat /tmp/tmp_dnsmasq.conf | sed -E -e "/#/d" >> /etc/storage/dnsmasq/dnsmasq.conf;sleep 3
-		rm /tmp/tmp_dnsmasq.conf >/dev/null 2>&1
-	fi
+# conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf" >> /tmp/tmp_dnsmasq.conf >/dev/null
+	cat /tmp/tmp_dnsmasq.conf | sed -E -e "/#/d" >> /etc/storage/dnsmasq/dnsmasq.conf >/dev/null 2>&1; sleep 3
+	rm /tmp/tmp_dnsmasq.conf
 fi
 
 if [ -f "/etc/storage/post_iptables_script.sh" ]; then
