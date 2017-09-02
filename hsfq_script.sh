@@ -169,7 +169,7 @@ log-async=50
 #min-cache-ttl=1800
 # 指定服务器'域名''地址'文件夹
 conf-dir=/etc/storage/dnsmasq.d/conf
-# conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf" >> /tmp/tmp_dnsmasq.conf >/dev/null
+# conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf" >> /tmp/tmp_dnsmasq.conf
 	cat /tmp/tmp_dnsmasq.conf | sed -E -e "/#/d" >> /etc/storage/dnsmasq/dnsmasq.conf; sleep 3
 	rm /tmp/tmp_dnsmasq.conf
 fi
