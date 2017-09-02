@@ -171,6 +171,7 @@ conf-dir=/etc/storage/dnsmasq.d/conf
 # conf-file=/etc/storage/dnsmasq.d/conf/hosts_fq.conf" >> /tmp/tmp_dnsmasq.conf
 		cat /tmp/tmp_dnsmasq.conf | sed -E -e "/#/d" >> /etc/storage/dnsmasq/dnsmasq.conf;sleep 3
 		rm /tmp/tmp_dnsmasq.conf
+	fi
 fi
 
 if [ -f "/etc/storage/post_iptables_script.sh" ]; then
