@@ -107,3 +107,4 @@ fi
 
 # 删除临时文件
 rm -f /tmp/hosts_ad.txt
+rm -f /tmp/hsfq_ssad.sh
