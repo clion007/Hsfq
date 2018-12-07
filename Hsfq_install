@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse	2018-12-06
+# Compile:by-lanse	2018-12-07
 
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
@@ -36,7 +36,7 @@ if [ "$Function_options" == "2" ]; then
 	sh /etc/storage/dnsmasq.d/hsfq_update.sh
 	echo -e "\e[1;34m 更新已完成,返回主菜单 \e[0m\n"
 	sleep 3
-	sh /tmp/hsfq_install
+	sh /tmp/Hsfq_install
 fi
 
 if [ "$Function_options" == "3" ]; then
@@ -78,7 +78,7 @@ if [ "$Function_options" == "3" ]; then
 		restart_dhcpd && /usr/sbin/dnsmasq restart >/dev/null 2>&1
 	fi
 	echo -e "\e[1;34m-- Hsfq 卸载完毕,返回主菜单--\e[0m\n" && sleep 3
-	sh /tmp/hsfq_install
+	sh /tmp/Hsfq_install
 fi
 
 if [ "$Function_options" == "4" ]; then
@@ -86,13 +86,13 @@ if [ "$Function_options" == "4" ]; then
 	[ -f /tmp/hsfq_script.sh ] && rm -rf /tmp/hsfq_script.sh
 	wget --no-check-certificate https://raw.githubusercontent.com/896660689/Hsfq/master/ss_ad.sh -O \
 	/tmp/hsfq_ssad.sh && chmod +x /tmp/hsfq_ssad.sh && . /tmp/hsfq_ssad.sh
-	sh /tmp/hsfq_install
+	sh /tmp/Hsfq_install
 fi
 
 if [ "$Function_options" == "5" ]; then
 	sh /etc/storage/bin/hsfq_ssad.sh
 	echo -e "\e[1;34m 纯净去广告更新已完成,返回主菜单 \e[0m\n" && sleep 3
-	sh /tmp/hsfq_install
+	sh /tmp/Hsfq_install
 fi
 
 if [ "$Function_options" == "6" ]; then
@@ -120,10 +120,10 @@ if [ "$Function_options" == "6" ]; then
 
 	[ -f "/tmp/hsfq_ssad.sh" ] && rm -f /tmp/hsfq_ssad.sh
 	echo -e "\e[1;34m--纯净去广告卸载完毕,返回主菜单--\e[0m\n" && sleep 3
-	sh /tmp/hsfq_install
+	sh /tmp/Hsfq_install
 fi
 
 if [ "$Function_options" == "7" ]; then
-	[ -f /tmp/hsfq_install ] && rm -f /tmp/hsfq_install
+	[ -f /tmp/Hsfq_install ] && rm -f /tmp/Hsfq_install
 	[ -f /tmp/hsfq_script.sh ] && rm -f /tmp/hsfq_script.sh
 fi
