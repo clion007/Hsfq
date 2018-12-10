@@ -21,7 +21,7 @@ echo -e "\e[1;36m >	5. 更新 \e[1;36mpadavan 纯净去广告 AD 版本\e[0m\n"
 
 echo -e "\e[1;31m >	6. 卸载 \e[1;36mpadavan 纯净去广告 AD 版本\e[0m\n"
 
-echo -e "\e[1;31m >	7. \033[41;37m退出安装\e[0m\n"
+echo -e "\e[1;31m >	0. \033[41;37m退出安装\e[0m\n"
 
 echo -e -n "\e[44;37m 请输入数字继续执行: \e[0m" 
 read Function_options
@@ -123,7 +123,7 @@ if [ "$Function_options" == "6" ]; then
 	sh /tmp/Hsfq_install
 fi
 
-if [ "$Function_options" == "7" ]; then
+if [ "$Function_options" == "0" ]; then
 	[ -f /tmp/Hsfq_install ] && rm -f /tmp/Hsfq_install
 	[ -f /tmp/hsfq_script.sh ] && rm -f /tmp/hsfq_script.sh
 fi
