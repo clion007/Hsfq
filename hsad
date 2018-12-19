@@ -10,7 +10,7 @@ AD=/tmp/ad
 
 [ -f ${AD} ] && rm -rf ${AD};[ -f ${TMP_AD2} ] && rm -rf ${TMP_AD2};[ -f ${TMP_AD3} ] && rm -rf ${TMP_AD3};[ -f ${TMP_AD1} ] && rm -rf ${TMP_AD1}
 for URL in \
-	"https://raw.githubusercontent.com/vokins/yhosts/master/hosts" \
+	"https://raw.githubusercontent.com/vokins/yhosts/master/hosts"
 do
 	wget -t 15 -T 50 --no-check-certificate -O- "${URL}" \
 	| sed -E -e "s/#.*$//" -e "/^$/d" -e "/::/d" -e "/localhos/d" -e "s/[[:space:]][[:space:]]*/ /g" >> ${TMP_AD}
