@@ -27,7 +27,7 @@ sed -i 's/^/127.0.0.1 &/g' /tmp/blacklist
 
 # 合并 hosts 缓存
 #cat /tmp/blacklist /tmp/ad > /tmp/hosts_ad
-cat /tmp/blacklist /tmp/Ad0.conf /tmp/ad /tmp/abd > /tmp/hosts_ad
+cat /tmp/blacklist /tmp/ad /tmp/abd > /tmp/hosts_ad
 
 # 删除 hosts 缓存
 rm -rf /tmp/blacklist
