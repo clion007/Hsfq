@@ -1,5 +1,5 @@
 #!/bin/sh
-# Compile:by-lanse	2017-08-30
+# Compile:by-lanse	2018-12-06
 route_vlan=`/sbin/ifconfig br0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " " `
 username=`nvram get http_username`
 
@@ -16,8 +16,8 @@ if [ ! -f "/etc/storage/dnsmasq.d/userlist" ]; then
 	echo -e "\e[1;36m 创建自定义翻墙规则 \e[0m\n"
 	cat > "/etc/storage/dnsmasq.d/userlist" <<EOF
 # 国内dns优化
-address=/email.163.com/223.6.6.6
-address=/mail.qq.com/119.29.29.29
+address=/email.163.com/223.5.5.5
+#address=/mail.qq.com/114.114.114.110
 EOF
 fi
 chmod 644 /etc/storage/dnsmasq.d/userlist
@@ -35,10 +35,10 @@ if [ ! -f "/etc/storage/dnsmasq.d/resolv.conf" ]; then
 ## DNS解析服务器设置
 nameserver 127.0.0.1
 ## 根据网络环境选择DNS.最多6个地址按速排序
-nameserver 223.6.6.6
+nameserver 223.5.5.5
 nameserver 176.103.130.131
-nameserver 114.114.114.114
-nameserver 119.29.29.29
+nameserver 114.114.114.110
+nameserver 208.67.222.222
 nameserver 8.8.4.4
 EOF
 fi
@@ -112,7 +112,6 @@ if [ ! -f "/etc/storage/dnsmasq.d/whitelist" ]; then
 m.baidu.com
 github.com
 raw.githubusercontent.com
-my.k2
 tv.sohu.com
 toutiao.com
 jd.com
@@ -138,7 +137,7 @@ chmod 644 /etc/storage/dnsmasq.d/whitelist
 if [ -f "/etc/storage/cron/crontabs/$username" ]; then
 	echo -e "\e[1;33m 添加定时计划更新任务 \e[0m\n"
 	sed -i '/hsfq_update.sh/d' /etc/storage/cron/crontabs/$username
-	sed -i '$a 45 05 * * 2,4,6 sh /etc/storage/dnsmasq.d/hsfq_update.sh' /etc/storage/cron/crontabs/$username
+	sed -i '$a 30 5 * * * sh /etc/storage/dnsmasq.d/hsfq_update.sh &' /etc/storage/cron/crontabs/$username
 	sleep 2 && killall crond;/usr/sbin/crond
 fi
 
