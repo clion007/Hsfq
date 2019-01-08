@@ -40,7 +40,7 @@ rm -rf /tmp/abd.conf
 # 删除误杀广告规则
 if [ -s /etc/storage/dnsmasq.d/whitelist ]; then
 	cat /etc/storage/dnsmasq.d/whitelist | while read line;do
-	sed -i "/$line/d" /tmp/hosts_ad
+	sed -i "/$line/d /aiqiyi/d" /tmp/hosts_ad
 done
 fi
 
