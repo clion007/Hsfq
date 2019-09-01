@@ -72,24 +72,24 @@ if [ -f /tmp/hosts_ad.conf ]; then
 	echo | awk '{print$0}' /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf | sort | uniq -u > /tmp/hosts_ad.txt
 	if [ $? -eq 0 ];then
 		if [ ! -s "/tmp/hosts_ad.txt" ]; then
-			logger -t "【$LOGTIME】" "Hosts 规则已为最新,无需更新..."
+			logger "【$LOGTIME】" "Hosts 规则已为最新,无需更新..."
 			echo -e "\e[1;33m Hosts 已为最新规则无需更新.\e[0m"
 			echo -e "\n" && rm -f /tmp/hosts_ad.conf
 		else
 			echo
 			mv -f /tmp/hosts_ad.conf /etc/storage/bin/hosts/hosts.conf
 			if [ $? -eq 0 ]; then
-				logger -t "【$LOGTIME】" "最新 Hosts 规则更新完成..."
+				logger "【$LOGTIME】" "最新 Hosts 规则更新完成..."
 				echo -e "\e[1;33m Hosts 最新 Hosts 规则更新完成.\e[0m"
 				echo -e "\n" && rm -f /tmp/hosts_ad.conf
 			else
-				logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
+				logger "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 				echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
 				echo -e "\n" && /bin/sh /etc/storage/bin/hsfq_ssad.sh
 			fi
 		fi
 	else
-		logger -t "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
+		logger "【$LOGTIME】" "Hosts 更新失败，重新启动更新任务..."
 		echo
 		echo -e "\e[1;37m Hosts 更新失败，重新启动更新任务\e[0m"
 		echo -e "\n" && /bin/sh /etc/storage/bin/ss_ad.sh
