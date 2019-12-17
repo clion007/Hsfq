@@ -13,15 +13,15 @@ for URL in \
 	"https://easylist-downloads.adblockplus.org/easylistchina.txt"
 do
 	wget -t 15 -T 50 -c --no-check-certificate -O- "${URL}" \
-	| grep ^\|\|[^\*]*\^$ | sed -e "s:||:127.0.0.1 :"  -e "s/.$//" >> ${TMP_ABD4}
+	| grep ^\|\|[^\*]*\^$ | sed -e "s:||:0.0.0.0 :"  -e "s/.$//" >> ${TMP_ABD4}
 done
 
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/vokins/yhosts/master/dnsmasq/union.conf \
-| awk '{if($0!=line)print; line=$0}' | sed -E -e "s/address=\/./127.0.0.1\ /" -e "s/0.0.0.0$//" -e "/#/d" -e "s/.$//" >> ${TMP_ABD2}
+| awk '{if($0!=line)print; line=$0}' | sed -E -e "s/address=\/./0.0.0.0\ /" -e "s/0.0.0.0$//" -e "/#/d" -e "s/.$//" >> ${TMP_ABD2}
 [ $? -eq 0 ] || sh /tmp/abd.conf
 
 wget --no-check-certificate -t 20 -T 60 -O- https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP-FX.txt \
-| grep ^\|\|[^\*]*\^$ | sed -e "s:||:127.0.0.1 :"  -e "s/.$//" >> ${TMP_ABD3}
+| grep ^\|\|[^\*]*\^$ | sed -e "s:||:0.0.0.0 :"  -e "s/.$//" >> ${TMP_ABD3}
 
 sleep 2
 cat ${TMP_ABD2} ${TMP_ABD3} ${TMP_ABD4} > ${ABD}
